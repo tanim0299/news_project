@@ -9,6 +9,10 @@ use App\Models\district_information;
 
 class districtController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $country = country_information::where('status','1')->get();
@@ -56,8 +60,8 @@ class districtController extends Controller
     public function edit($id)
     {
         $country = country_information::where('status','1')->get();
-        $division = division_information::where('status','1')->get();
         $district = district_information::find($id);
+        $division = division_information::where('country_id',$district->country_id)->get();
         return view('Backend.User.DistrictInfo.edit_district',compact('country','division','district'));
     }
     public function update(Request $request,$id)

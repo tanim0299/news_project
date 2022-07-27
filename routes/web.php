@@ -117,3 +117,6 @@ Route::get('/editUpazila/{id}',[App\Http\Controllers\upazilaController::class, '
 Route::post('/upazilaUpdate/{id}',[App\Http\Controllers\upazilaController::class, 'update']);
 Route::get('/deleteUpazila/{id}',[App\Http\Controllers\upazilaController::class, 'delete']);
 
+//publish news
+Route::get('/publishNews',[App\Http\Controllers\newsController::class, 'index']);
+

@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class upazilaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $country = country_information::where('status','1')->get();

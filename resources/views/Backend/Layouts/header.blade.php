@@ -196,6 +196,9 @@ h3.m-b-0.f-w-700.text-white {
 span.select2-selection.select2-selection--single {
     border: none;
 }
+.district_info{
+    margin-top:20px;
+}
 
 </style>
 <body>
