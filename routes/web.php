@@ -119,4 +119,7 @@ Route::get('/deleteUpazila/{id}',[App\Http\Controllers\upazilaController::class,
 
 //publish news
 Route::get('/publishNews',[App\Http\Controllers\newsController::class, 'index']);
+Route::post('/loadPubDistrict',[App\Http\Controllers\newsController::class, 'loadPubDistrict']);
+Route::post('/loadPubUpazila',[App\Http\Controllers\newsController::class, 'loadPubUpazila']);
+Route::post('/loadSubMenu',[App\Http\Controllers\newsController::class, 'loadSubMenu']);
 

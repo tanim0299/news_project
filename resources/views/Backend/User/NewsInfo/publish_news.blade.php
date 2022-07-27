@@ -76,7 +76,7 @@
                     @foreach($division as $showdivision)
                     <div class="checkbox-fade fade-in-primary">
                         <label>
-                        <input id="division-id-{{$showdivision->id}}" type="checkbox" value="{{$showdivision->id}}" name="division_id[]">
+                        <input onclick="loadDistrict({{$showdivision->id}})" id="division-id-{{$showdivision->id}}" type="checkbox" value="{{$showdivision->id}}" name="division_id[]">
                         <span class="cr">
                         <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                         </span>
@@ -87,26 +87,60 @@
                     @endif
                 </div>
                 <div class="input-single-box">
-                    <label>District Info</label><br>
+                    <label>Select District</label><br>
                     <div class="row" id="district_data">
-                        <div class="col-4">
-                            <div><span>>></span><b>বিভাগ নাম</b></div>
-                            <ul class='district_info'>
-                                <li>
-                                    <div class="checkbox-fade fade-in-primary">
-                                        <label>
-                                        <input id="division-id-{{$showdivision->id}}" type="checkbox" value="{{$showdivision->id}}" name="division_id[]">
-                                        <span class="cr">
-                                        <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
-                                        </span>
-                                        <span>{{$showdivision->division_name}}</span>
-                                        </label>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                        
                     </div>
                     
+                </div>
+                <div class="input-single-box">
+                    <label>Select Upazila</label><br>
+                    <div class="row" id="upazila_data">
+                        
+                    </div>
+                    
+                </div>
+                <div class="input-single-box">
+                    <label>Select Cateorey</label><br>
+                    @if($categorey)
+                    @foreach($categorey as $showcategorey)
+                    <div class="checkbox-fade fade-in-primary">
+                        <label>
+                        <input type="checkbox" value="{{$showcategorey->id}}" name="categorey_id[]">
+                        <span class="cr">
+                        <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
+                        </span>
+                        <span>{{$showcategorey->cat_name}}</span>
+                        </label>
+                    </div>
+                    @endforeach
+                    @endif
+                </div>
+                <div class="input-single-box">
+                    <label>Select Hom Page Menu</label><br>
+                    @if($menu)
+                    @foreach($menu as $showmenu)
+                    <div class="checkbox-fade fade-in-primary">
+                        <label>
+                        <input type="checkbox" value="{{$showmenu->id}}" name="menu_id[]" id="menu-id-{{$showmenu->id}}" onclick="loadSubMenu({{$showmenu->id}})">
+                        <span class="cr">
+                        <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
+                        </span>
+                        <span>{{$showmenu->link_name}}</span>
+                        </label>
+                    </div>
+                    @endforeach
+                    @endif
+                </div>
+                <div class="input-single-box">
+                    <label>Select Hom Page Sub Menu</label><br>
+                    <div class="row" id="sub_menu_data">
+                        
+                    </div>
+                </div>
+                <div class="input-single-box">
+                    <label>Reporter Name</label><br>
+                    <input type="text" name="reporter_name" class="form-control" value="{{Auth()->user()->name}}">
                 </div>
                 <div class="input-single-box">
                     <label>Status</label>

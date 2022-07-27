@@ -252,14 +252,108 @@ instance = new dtsel.DTS('input[id="dateTimePicker2"]',  {
 
 <script>
 
-    $(document).ready(function(){
+    
 
         function loadDistrict(id)
         {
+            // alert(id);
 
+            if($("#division-id-"+id).is(':checked'))
+            {
+                $.ajax({
+                    headers : 
+                    {
+                        'X-CSRF-TOKEN' : '{{ csrf_token() }}'
+                    },
+
+                    url : '{{url('loadPubDistrict')}}',
+
+                    type : 'POST',
+
+                    data : {division_id:id},
+
+                    success : function(data)
+                    {
+                        
+                        $('#district_data').append(data);
+                    }
+                });
+            }
+            else if($("#division-id-"+id).is(':not(:checked)'))
+            {
+                $("#division-box-"+id).remove();
+            }
         }
 
-    });
+        function loadPubUpazila(id)
+        {
+            
+            if($("#district-id-"+id).is(':checked'))
+            {
+                $.ajax({
+
+                    headers:
+                    {
+                        'X-CSRF-TOKEN' : '{{ csrf_token() }}'
+                    },
+
+                    url : '{{url('loadPubUpazila')}}',
+
+                    type : 'POST',
+
+                    data : {district_id:id},
+
+                    success : function(data)
+                    {
+                        $("#upazila_data").append(data);
+                        console.log(data);
+                    }
+
+                });
+
+            }
+            else if($("#district-id-"+id).is(':not(:checked)'))
+            {
+                $("#district-box-"+id).remove();
+            }
+
+        
+        }
+
+        function loadSubMenu(id)
+        {
+            if($('#menu-id-'+id).is(':checked'))
+            {
+                $.ajax({
+
+                    headers : 
+                    {
+                        'X-CSRF-TOKEN' : '{{ csrf_token() }}'
+                    },
+
+                    url : '{{url('loadSubMenu')}}',
+
+                    type : 'POST',
+
+                    data : {menu_id:id},
+
+                    success : function(data)
+                    {
+                        $("#sub_menu_data").append(data);
+                        // console.log(data);
+                    }
+
+                });
+            }
+            else if($('#menu-id-'+id).is(':not(:checked)'))
+            {
+                $("#main_menu-box-"+id).remove();
+            }
+        }
+
+        // loadDistrict();
+
+    
 
 </script>
 

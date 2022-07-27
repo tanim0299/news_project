@@ -199,6 +199,15 @@ span.select2-selection.select2-selection--single {
 .district_info{
     margin-top:20px;
 }
+.division_title {
+    /* background: black; */
+    padding-left: 10px;
+    padding: 8px 10px;
+    /* color: white; */
+    border-left: 2px solid red;
+    background: lightgray;
+    font-weight: bold;
+}
 
 </style>
 <body>
