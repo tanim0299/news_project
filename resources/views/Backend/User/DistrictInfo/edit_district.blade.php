@@ -68,7 +68,7 @@
                 </div>
                 <div class="input-single-box" id="">
                     <label>Select Division</label>
-                    <select class="form-control" name="division_id" id="division">
+                    <select class="form-control js-example-basic-single col-sm-12" name="division_id" id="division">
                     @if($division)
                     @foreach($division as $showdivision)
                     <option @if($district->division_id == $showdivision->id) selected @endif value="{{$showdivision->id}}">{{$showdivision->division_name}}</option>

@@ -49,6 +49,7 @@ class upazilaController extends Controller
                 ->join('district_information','district_information.id','=','upazila_information.district_id')
                 ->select('country_information.country_name','division_information.division_name','district_information.district_name','upazila_information.*')
                 ->get();
+        // return count($data);
         $sl=1;
         return view('Backend.User.UpazilaInfo.view_upazila',compact('data','sl'));
     }

@@ -62,7 +62,7 @@
                 </div>
                 <div class="input-single-box">
                     <label>Main Menu</label>
-                    <select class="form-control" name="main_menuid">
+                    <select class="form-control js-example-basic-single col-sm-12" name="main_menuid">
                         @if($main_menu)
                         @foreach($main_menu as $show_mainmenu)
                         <option @if($data->main_menuid == $show_mainmenu->id) selected @endif value="{{$show_mainmenu->id}}">{{$show_mainmenu->link_name}}</option>

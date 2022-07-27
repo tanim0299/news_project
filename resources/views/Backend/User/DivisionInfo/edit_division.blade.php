@@ -57,7 +57,7 @@
                 @csrf
                 <div class="input-single-box">
                     <label>Select Country</label>
-                    <select class="form-control" name="country_id">
+                    <select class="form-control js-example-basic-single col-sm-12" name="country_id">
                         @if($country)
                         @foreach($country as $showcountry)
                         <option @if($showcountry->id == $data->country_id) selected @endif value="{{$showcountry->id}}">{{$showcountry->country_name}}</option>
