@@ -52,11 +52,19 @@
                         <strong>{{Session::get('error')}}</strong>
                 </div>
                 @endif
-            <form method="POST" enctype="multipart/form-data" action="{{url('/upazilaStore')}}">
+            <form method="POST" enctype="multipart/form-data" action="{{url('/newsStore')}}">
                 @csrf
                 <div class="input-single-box">
                     <label>Date (YYYY/MM/DD)</label>
                     <input name="date" class="form-control" type="text" value="@php echo date('Y-m-d') @endphp" required id="dateTimePicker">
+                </div>
+                <div class="input-single-box">
+                    <label>News Type</label>
+                    <select class="form-control" name="news_type">
+                        <option>Select One</option>
+                        <option value="top_news">Top News</option>
+                        <option value="local_news">Local News</option>
+                    </select>
                 </div>
                 <div class="input-single-box">
                     <label>News Title</label>
@@ -140,7 +148,7 @@
                 </div>
                 <div class="input-single-box">
                     <label>Reporter Name</label><br>
-                    <input type="text" name="reporter_name" class="form-control" value="{{Auth()->user()->name}}">
+                    <input type="text" name="reporters_name" class="form-control" value="{{Auth()->user()->name}}">
                 </div>
                 <div class="input-single-box">
                     <label>Status</label>

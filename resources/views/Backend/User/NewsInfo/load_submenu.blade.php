@@ -7,7 +7,7 @@
         <li>
             <div class="checkbox-fade fade-in-primary">
                 <label>
-                <input id="sub_menu-id-{{$showsub_menu->id}}" type="checkbox" value="{{$showsub_menu->id}}" name="division_id[]">
+                <input id="sub_menu-id-{{$showsub_menu->id}}" type="checkbox" value="{{$main_menu->id}}and{{$showsub_menu->id}}" name="sub_menu_id[]">
                 <span class="cr">
                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                 </span>

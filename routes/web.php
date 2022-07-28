@@ -122,4 +122,6 @@ Route::get('/publishNews',[App\Http\Controllers\newsController::class, 'index'])
 Route::post('/loadPubDistrict',[App\Http\Controllers\newsController::class, 'loadPubDistrict']);
 Route::post('/loadPubUpazila',[App\Http\Controllers\newsController::class, 'loadPubUpazila']);
 Route::post('/loadSubMenu',[App\Http\Controllers\newsController::class, 'loadSubMenu']);
+Route::post('/newsStore',[App\Http\Controllers\newsController::class, 'store']);
+Route::get('/viewNews',[App\Http\Controllers\newsController::class, 'view']);
 

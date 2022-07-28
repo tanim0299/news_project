@@ -7,7 +7,7 @@
         <li>
             <div class="checkbox-fade fade-in-primary">
                 <label>
-                <input onclick="loadPubUpazila({{$showdistrict->id}})" id="district-id-{{$showdistrict->id}}" type="checkbox" value="{{$showdistrict->id}}" name="division_id[]">
+                <input onclick="loadPubUpazila({{$showdistrict->id}})" id="district-id-{{$showdistrict->id}}" type="checkbox" value="{{$division->id}}and{{$showdistrict->id}}" name="district_id[]">
                 <span class="cr">
                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                 </span>

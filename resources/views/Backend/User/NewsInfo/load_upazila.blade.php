@@ -7,7 +7,7 @@
         <li>
             <div class="checkbox-fade fade-in-primary">
                 <label>
-                <input id="upazila-id-{{$showupazila->id}}" type="checkbox" value="{{$showupazila->id}}" name="division_id[]">
+                <input id="upazila-id-{{$showupazila->id}}" type="checkbox" value="{{$showupazila->division_id}}and{{$district->id}}and{{$showupazila->id}}" name="upazila_id[]">
                 <span class="cr">
                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                 </span>
