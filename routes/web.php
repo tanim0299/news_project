@@ -124,4 +124,7 @@ Route::post('/loadPubUpazila',[App\Http\Controllers\newsController::class, 'load
 Route::post('/loadSubMenu',[App\Http\Controllers\newsController::class, 'loadSubMenu']);
 Route::post('/newsStore',[App\Http\Controllers\newsController::class, 'store']);
 Route::get('/viewNews',[App\Http\Controllers\newsController::class, 'view']);
+Route::get('/editNews/{id}',[App\Http\Controllers\newsController::class, 'edit']);
+Route::post('/newsUpdate/{id}',[App\Http\Controllers\newsController::class, 'update']);
+Route::get('/deleteNews/{id}',[App\Http\Controllers\newsController::class, 'delete']);
 
