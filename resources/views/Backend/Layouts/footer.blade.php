@@ -8,7 +8,7 @@
 
 
 
-
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script> -->
 
 <script type="text/javascript" src="{{asset('public/components')}}/bower_components/jquery/js/jquery.min.js"></script>
 <script type="text/javascript" src="{{asset('public/components')}}/bower_components/jquery-ui/js/jquery-ui.min.js"></script>
@@ -358,66 +358,66 @@ instance = new dtsel.DTS('input[id="dateTimePicker2"]',  {
 </script>
 
 <script>
+    
+        $(document).ready(function(){
 
-jQuery("document").ready(function($) {
+        
 
-        $("#addImage").on('click',function(e){
-            e.preventDefault();
-            
-            let image = new FormData();
+            $("#uploadImages").submit(function(e){
+                e.preventDefault();
+                var formData = new FormData(this);
 
-            // alert(image);
+                let totalFiles = $('#images')[0].files.length; // total_files;
 
-            let TotalImages = $('#uploadImage')[0].files.length;//total Images
+                let images = $('#images')[0];
 
-            // alert(TotalImages);
-
-            let images = $("#uploadImage")[0];
-
-            for (let i = 0; i < TotalImages; i++) 
-            {
-                image.append('images' + i, images.files[i]);
-                
-            }
-
-            image.append('TotalImages',TotalImages);
-
-            $.ajax({
-
-                headers:
+                for (let i = 0; i < totalFiles; i++) 
                 {
-                    'X-CSRF-TOKEN' : '{{ csrf_token() }}'
-                },
-                url : '{{url('currentImageUpload')}}',
-
-                type : 'POST',
-
-                contentType : false,
-
-                processData : false,
-
-                data : image,
-
-                success : function(data)
-                {
-                    if(data == 1)
-                    {
-                        alert('success');
-                    }
-                    else
-                    {
-                        alert('error');
-                    }
+                    
+                    formData.append('images'+i, images.files[i]);
+                    
                 }
 
+                formData.append('totalFiles', totalFiles);
+
+                $.ajax({
+
+                    headers:
+                    {
+                        'X-CSRF-TOKEN' : '{{ csrf_token() }}'
+                    },
+
+                    url : '{{url('uploadCurrentImage')}}',
+
+                    type : 'POST',
+
+                    contentType : false,
+
+                    processData : false,
+
+                    cache : false,
+
+                    dataType : 'json',
+
+                    data : formData,
+
+                    success : function(data)
+                    {
+                        console.log(data);
+                    }
+
+                });
+
+                // alert(images);
             });
-            
+
         });
+    
+    
+    </script>
 
-    });
 
 
-</script>
 
 </body>
 

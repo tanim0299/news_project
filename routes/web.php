@@ -130,5 +130,5 @@ Route::get('/deleteNews/{id}',[App\Http\Controllers\newsController::class, 'dele
 
 //image_info
 Route::get('/addImage',[App\Http\Controllers\imageUploadController::class, 'index']);
-Route::post('/currentImageUpload',[App\Http\Controllers\imageUploadController::class, 'currentImageUpload']);
+Route::post('/uploadCurrentImage',[App\Http\Controllers\imageUploadController::class, 'uploadCurrentImage']);
 

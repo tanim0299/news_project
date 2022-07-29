@@ -52,6 +52,18 @@
                         <strong>{{Session::get('error')}}</strong>
                 </div>
                 @endif
+            <div class="input-single-box">
+            <form enctype="multipart/form-data" id="uploadImages" method="POST" >
+                    <div id="errors"></div>
+                    <div class="form-group">
+                        <label> Select Images</label>
+                        <input type="file" class="form-control" name="images[]" multiple  id="images">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class=" btn btn-success"  value="Save"  >
+                    </div>
+                </form>
+            </div>
             <form method="POST" enctype="multipart/form-data" action="{{url('dfjkjsdkfj')}}">
                 @csrf
                 <div class="input-single-box">
@@ -61,10 +73,6 @@
                 <div class="input-single-box">
                     <label>Title</label>
                     <input type="text" name="title" class="form-control" value="{{old('title')}}">
-                </div>
-                <div class="input-single-box">
-                    <label>Image (You Can Chose Multiple Image)</label><br>
-                    <input type="file" name="title" multiple name="image[]" id="uploadImage"> <button class="btn btn-info" id="addImage">+ Add Image</button>
                 </div>
                 <input type="text" name="admin_id" class="form-control" value="{{Auth()->user()->id}}" hidden>
                 <div class="image_data" style="margin-top:20px;">
