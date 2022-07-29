@@ -371,7 +371,7 @@ span.select2-selection.select2-selection--single {
 <div class="pcoded-navigation-label">Others Links</div>
 <ul class="pcoded-item pcoded-left-item">
 @php 
-$main_menu = DB::table('main_menu')->orderBy('sl','ASC')->get()->where('status','1');
+$main_menu = DB::table('main_menu')->orderBy('id','ASC')->get()->where('status','1');
 $sub_menu = DB::table('sub_menu')
 			->join('main_menu','main_menu.id','=','sub_menu.main_menuid')
 			->select('main_menu.link_name','sub_menu.*')

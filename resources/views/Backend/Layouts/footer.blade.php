@@ -326,7 +326,7 @@ instance = new dtsel.DTS('input[id="dateTimePicker2"]',  {
             {
                 $.ajax({
 
-                    headers : 
+                    headers:
                     {
                         'X-CSRF-TOKEN' : '{{ csrf_token() }}'
                     },
@@ -354,6 +354,68 @@ instance = new dtsel.DTS('input[id="dateTimePicker2"]',  {
         // loadDistrict();
 
     
+
+</script>
+
+<script>
+
+jQuery("document").ready(function($) {
+
+        $("#addImage").on('click',function(e){
+            e.preventDefault();
+            
+            let image = new FormData();
+
+            // alert(image);
+
+            let TotalImages = $('#uploadImage')[0].files.length;//total Images
+
+            // alert(TotalImages);
+
+            let images = $("#uploadImage")[0];
+
+            for (let i = 0; i < TotalImages; i++) 
+            {
+                image.append('images' + i, images.files[i]);
+                
+            }
+
+            image.append('TotalImages',TotalImages);
+
+            $.ajax({
+
+                headers:
+                {
+                    'X-CSRF-TOKEN' : '{{ csrf_token() }}'
+                },
+                url : '{{url('currentImageUpload')}}',
+
+                type : 'POST',
+
+                contentType : false,
+
+                processData : false,
+
+                data : image,
+
+                success : function(data)
+                {
+                    if(data == 1)
+                    {
+                        alert('success');
+                    }
+                    else
+                    {
+                        alert('error');
+                    }
+                }
+
+            });
+            
+        });
+
+    });
+
 
 </script>
 

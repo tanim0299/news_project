@@ -128,3 +128,7 @@ Route::get('/editNews/{id}',[App\Http\Controllers\newsController::class, 'edit']
 Route::post('/newsUpdate/{id}',[App\Http\Controllers\newsController::class, 'update']);
 Route::get('/deleteNews/{id}',[App\Http\Controllers\newsController::class, 'delete']);
 
+//image_info
+Route::get('/addImage',[App\Http\Controllers\imageUploadController::class, 'index']);
+Route::post('/currentImageUpload',[App\Http\Controllers\imageUploadController::class, 'currentImageUpload']);
+
