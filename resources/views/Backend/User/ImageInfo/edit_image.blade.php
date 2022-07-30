@@ -8,7 +8,7 @@
 <div class="page-header-title">
 <!-- <i class="feather icon-home bg-c-blue"></i> -->
 <div class="d-inline">
-<h5>Add Image</h5>
+<h5>Edit Image</h5>
 <!-- <span>This Is SBIT Dashboard</span> -->
 <div class="links" style="margin-top: 20px;">
     <a href="{{url('viewImage')}}" class="btn btn-outline-info">View Image</a>
@@ -29,7 +29,7 @@
  <div class="form-body">
     <div class="card">
         <div class="card-header">
-             <h5>Add Image</h5>
+             <h5>Edit Image</h5>
         </div>
         <div class="card-block">
             @if ($errors->any())
@@ -58,26 +58,28 @@
                     <input type="file" class="" name="images[]" multiple  id="images">
                     <input type="submit" class=" btn btn-success"  value="+ Add Image"  >
                 </form>
-                <img src="{{asset('public/Backend')}}/Images/loading.gif" class="img-fluid" id="loading">
             </div>
-            <form method="POST" enctype="multipart/form-data" action="{{url('/imageStore')}}">
+            @if($data)
+            <form method="POST" enctype="multipart/form-data" action="{{url('/imageUpdate')}}/{{$data->id}}">
                 @csrf
                 <div class="input-single-box">
                     <label>Date</label>
-                    <input type="text" name="date" class="form-control" value="{{old('date')}}" id="dateTimePicker" autocomplete="off">
+                    <input type="text" name="date" class="form-control" value="{{$data->date}}" id="dateTimePicker" autocomplete="off">
                 </div>
                 <div class="input-single-box">
                     <label>Title</label>
-                    <input type="text" name="title" class="form-control" value="{{old('title')}}">
+                    <input type="text" name="title" class="form-control" value="{{$data->title}}">
                 </div>
                 <input type="text" name="admin_id" class="form-control" value="{{Auth()->user()->id}}" hidden>
                 <div class="image_data" style="margin-top:20px;">
-                    <img src="{{asset('public/Backend')}}/Images/loading.gif" class="img-fluid" id="loading">
+                    
                 </div>
                 <div class="input-single-box">
                     <input type="submit" name="submit" class="btn btn-success">
+                    <b class="badge badge-warning">You Must Submit This Form Otherwise Image Will Not Appear</b>
                 </div>
             </form>
+            @endif
         </div>
     </div> 
  </div>

@@ -132,4 +132,10 @@ Route::get('/deleteNews/{id}',[App\Http\Controllers\newsController::class, 'dele
 Route::get('/addImage',[App\Http\Controllers\imageUploadController::class, 'index']);
 Route::post('/uploadCurrentImage',[App\Http\Controllers\imageUploadController::class, 'uploadCurrentImage']);
 Route::post('/loadCurrentImage',[App\Http\Controllers\imageUploadController::class, 'loadCurrentImage']);
+Route::post('/deleteCurrentImage',[App\Http\Controllers\imageUploadController::class, 'deleteCurrentImage']);
+Route::post('/imageStore',[App\Http\Controllers\imageUploadController::class, 'store']);
+Route::get('/viewImage',[App\Http\Controllers\imageUploadController::class, 'view']);
+Route::get('/editImage/{id}',[App\Http\Controllers\imageUploadController::class, 'edit']);
+Route::post('/imageUpdate/{id}',[App\Http\Controllers\imageUploadController::class, 'update']);
+Route::get('/deleteImage/{id}',[App\Http\Controllers\imageUploadController::class, 'delete']);
 

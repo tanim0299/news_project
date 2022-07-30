@@ -364,6 +364,7 @@ instance = new dtsel.DTS('input[id="dateTimePicker2"]',  {
 
         function loadCurrentImage()
         {
+            $('#loading').hide();
             $.ajax({
 
                 headers:
@@ -377,6 +378,7 @@ instance = new dtsel.DTS('input[id="dateTimePicker2"]',  {
 
                 success : function(data)
                 {
+                    $('#loading').hide();
                     $('.image_data').html(data);
                 }
 
@@ -386,6 +388,8 @@ instance = new dtsel.DTS('input[id="dateTimePicker2"]',  {
         loadCurrentImage();
     
         $(document).ready(function(){
+
+            $('#loading').hide();
 
             $("#uploadImages").submit(function(e){
                 e.preventDefault();
@@ -403,7 +407,7 @@ instance = new dtsel.DTS('input[id="dateTimePicker2"]',  {
                 }
 
                 formData.append('totalFiles', totalFiles);
-
+                $('#loading').show();
                 $.ajax({
 
                     headers:
@@ -429,7 +433,8 @@ instance = new dtsel.DTS('input[id="dateTimePicker2"]',  {
                     {
                         if(data == 1)
                         {
-                            UIkit.notification({message: '<span uk-icon=\'icon: check\'></span> Image Added Succesfully'});
+                            $('#loading').hide();
+                            UIkit.notification({message: '<span uk-icon=\'icon: check\'></span>'+totalFiles+' Image Added Succesfully'});
                             loadCurrentImage();
                             $('#uploadImages').trigger('reset');
                         }
@@ -447,6 +452,44 @@ instance = new dtsel.DTS('input[id="dateTimePicker2"]',  {
         });
     
     
+    </script>
+
+    <script>
+
+       function deleteCurrent(id)
+       {
+           
+            $(document).on('click','#delCurrent-'+id, function(){
+                var dataid = $(this).data('id');
+                var element = this;
+                $.ajax({
+                    headers:
+                    {
+                        'X-CSRF-TOKEN' : '{{ csrf_token() }}'
+                    },
+                    url : '{{url('deleteCurrentImage')}}',
+
+                    type : 'POST',
+
+                    data : {id:dataid},
+
+                    success : function(data)
+                    {
+                        // console.log(data);
+                        if(data == 1)
+                        {
+                            $(element).closest('tr').remove();
+                            UIkit.notification({message: '<span uk-icon=\'icon: check\'></span> Image Removed Succesfully'});
+                        }
+                        else
+                        {
+                            UIkit.notification({message: 'Some Thing Went Wrong!'});
+                        }
+                    }
+                });
+            });
+       };
+
     </script>
 
 
