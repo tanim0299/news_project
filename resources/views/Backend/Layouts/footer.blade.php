@@ -92,6 +92,9 @@
 
 
 
+
+
+
 <script type="text/javascript" src="{{asset('public/components')}}/bower_components/select2/js/select2.full.min.js"></script>
 <script type="text/javascript" src="{{asset('public/components')}}/assets/pages/advance-elements/select2-custom.js"></script>
 
@@ -358,10 +361,31 @@ instance = new dtsel.DTS('input[id="dateTimePicker2"]',  {
 </script>
 
 <script>
+
+        function loadCurrentImage()
+        {
+            $.ajax({
+
+                headers:
+                {
+                    'X-CSRF-TOKEN' : '{{ csrf_token() }}'
+                },
+
+                url : '{{url('loadCurrentImage')}}',
+
+                type : 'POST',
+
+                success : function(data)
+                {
+                    $('.image_data').html(data);
+                }
+
+            });
+        }
+
+        loadCurrentImage();
     
         $(document).ready(function(){
-
-        
 
             $("#uploadImages").submit(function(e){
                 e.preventDefault();
@@ -403,7 +427,16 @@ instance = new dtsel.DTS('input[id="dateTimePicker2"]',  {
 
                     success : function(data)
                     {
-                        console.log(data);
+                        if(data == 1)
+                        {
+                            UIkit.notification({message: '<span uk-icon=\'icon: check\'></span> Image Added Succesfully'});
+                            loadCurrentImage();
+                            $('#uploadImages').trigger('reset');
+                        }
+                        else
+                        {
+                            alert('failed');
+                        }
                     }
 
                 });
@@ -423,3 +456,5 @@ instance = new dtsel.DTS('input[id="dateTimePicker2"]',  {
 
 <!-- Mirrored from demo.dashboardpack.com/admindek-html/default/dashboard-crm.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 14 Jun 2022 06:17:14 GMT -->
 </html>
+
+

@@ -32,7 +32,7 @@ class imageUploadController extends Controller
 
                     $image_name = rand().'.'.$file->getClientOriginalExtension();
 
-                    $file->move(public_path().'/photoGallery/'.$image_name);
+                    $file->move(public_path().'/photoGallery/',$image_name);
 
                     current_image::insert([
                         'session_id'=>$session_id,
@@ -47,5 +47,16 @@ class imageUploadController extends Controller
             return 0;
         }
 
+    }
+
+    public function loadCurrentImage()
+    {
+        $session_id = Session::getId();
+
+        $data = current_image::where("session_id",$session_id)->get();
+
+        $sl=1;
+
+        return view("Backend.User.ImageInfo.load_current_image",compact('data','sl'));
     }
 }

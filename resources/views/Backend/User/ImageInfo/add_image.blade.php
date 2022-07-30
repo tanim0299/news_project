@@ -53,14 +53,14 @@
                 </div>
                 @endif
             <div class="input-single-box">
-            <form enctype="multipart/form-data" id="uploadImages" method="POST" >
+                <form enctype="multipart/form-data" id="uploadImages" method="POST" >
                     <div id="errors"></div>
                     <div class="form-group">
                         <label> Select Images</label>
                         <input type="file" class="form-control" name="images[]" multiple  id="images">
                     </div>
                     <div class="form-group">
-                        <input type="submit" class=" btn btn-success"  value="Save"  >
+                        <input type="submit" class=" btn btn-success"  value="+ Add Image"  >
                     </div>
                 </form>
             </div>
@@ -76,35 +76,7 @@
                 </div>
                 <input type="text" name="admin_id" class="form-control" value="{{Auth()->user()->id}}" hidden>
                 <div class="image_data" style="margin-top:20px;">
-                <b>Selected Images</b>
-                    <div class="dt-responsive table-responsive">
-                    <table class="table table-striped table-bordered nowrap dataTable" id="order-table">
-                        <thead>
-                            <tr>
-                                <th>Sl</th>
-                                <th>Caption</th>
-                                <th>Click By</th>
-                                <th>Image</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>
-                                    <textarea class="form-control" name="caption" placeholder="Write Caption"></textarea>
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" name="click_by" placeholder="click by:">
-                                </td>
-                                <td></td>
-                                <td>
-                                    <a href="#" class="btn btn-outline-danger">X</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            
                 </div>
                 <div class="input-single-box">
                     <input type="submit" name="submit" class="btn btn-success">

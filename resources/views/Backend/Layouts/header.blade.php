@@ -75,6 +75,10 @@
 	<link href="https://fonts.maateen.me/adorsho-lipi/font.css" rel="stylesheet">
 
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.1/dist/css/uikit.min.css" />
+
+
+
 
 
 
@@ -86,7 +90,9 @@
 	body select h1 h2 h3 h4 h5 h6{
             font-family: 'AdorshoLipi', sans-serif;
         }
-
+        ul.nav-right {
+    margin-top: 0px;
+}
 	input.form-control{
 		border: 1px solid lightgray;
 	}
