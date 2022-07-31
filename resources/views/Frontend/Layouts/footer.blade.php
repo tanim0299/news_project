@@ -5,6 +5,15 @@ $count = news_categorey::count();
 
 $skip = 9;
 
+
+
+
+
+
+
+
+
+
 $limit =$count-$skip;
 $news_cat_footer = news_categorey::where('status','1')->skip(30)->take(30)->get();
 @endphp

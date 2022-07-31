@@ -1,3 +1,9 @@
+@php
+use App\Models\website_settings;
+
+
+$settings = website_settings::find(1)->first();
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
@@ -235,7 +241,7 @@ span.select2-selection.select2-selection--single {
 <div class="navbar-wrapper">
 <div class="navbar-logo">
 <a href="{{url('/dashboard')}}">
-<img class="img-fluid" src="{{asset('public/components')}}/images/logo.png" alt="Theme-Logo" />
+<img class="img-fluid" src="{{asset('public/components')}}/images/{{$settings->image}}" alt="Theme-Logo" />
 </a>
 <a class="mobile-menu" id="mobile-collapse" href="#!">
 <i class="feather icon-menu icon-toggle-right"></i>

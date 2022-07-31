@@ -2,6 +2,10 @@
 use Rakibhstu\Banglanumber\NumberToBangla;
 use App\Models\news_categorey;
 use App\Models\news_menu;
+use App\Models\website_settings;
+
+
+$settings = website_settings::find(1)->first();
 
 
 $numto = new NumberToBangla();
@@ -56,10 +60,10 @@ $news_menu = news_menu::where('status','1')->get();
 								<a href="#" class="btn btn-outline-info">লগইন</a>
 							</div>
 							<div class="links" style="margin-top:10px;">
-								<a href="#"><i class="fab fa-facebook-f"></i></a>	
-								<a href="#"><i class="fab fa-twitter"></i></a>	
-								<a href="#"><i class="fab fa-instagram"></i></a>	
-								<a href="#"><i class="fab fa-youtube"></i></a>	
+								<a href="{{$settings->facebook}}"><i class="fab fa-facebook-f"></i></a>	
+								<a href="{{$settings->twitter}}"><i class="fab fa-twitter"></i></a>	
+								<a href="{{$settings->instagram}}"><i class="fab fa-instagram"></i></a>	
+								<a href="{{$settings->youtube}}"><i class="fab fa-youtube"></i></a>	
 							</div>
 
 					    </div>
@@ -91,7 +95,7 @@ $news_menu = news_menu::where('status','1')->get();
 			</div>
 			<div class="col-lg-6 col-12">
 				<div class="logo">
-					<a href="{{url('/')}}"><img src="{{asset('public/components')}}/Images/logo.png" class="img-fluid"></a>
+					<a href="{{url('/')}}"><img src="{{asset('public/components')}}/Images/{{$settings->image}}" class="img-fluid"></a>
 				</div>
 			</div>
 			<div class="col-lg-3" id="login-icon">
@@ -101,10 +105,10 @@ $news_menu = news_menu::where('status','1')->get();
 						<a href="#" class="btn btn-outline-info">লগইন</a>
 					</div>
 					<div class="links" style="margin-top:10px;">
-						<a href="#"><i class="fab fa-facebook-f"></i></a>	
-						<a href="#"><i class="fab fa-twitter"></i></a>	
-						<a href="#"><i class="fab fa-instagram"></i></a>	
-						<a href="#"><i class="fab fa-youtube"></i></a>	
+						<a href="{{$settings->facebook}}"><i class="fab fa-facebook-f"></i></a>	
+						<a href="{{$settings->twitter}}"><i class="fab fa-twitter"></i></a>	
+						<a href="{{$settings->instagram}}"><i class="fab fa-instagram"></i></a>	
+						<a href="{{$settings->youtube}}"><i class="fab fa-youtube"></i></a>		
 					</div>
 				</div>
 			</div>

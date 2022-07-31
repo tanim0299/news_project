@@ -24,7 +24,7 @@ body[themebg-pattern=theme1]
     font-size: 26px;
     text-align: left;
     padding: 0;
-}button.uk-button.uk-button-default.uk-margin-small-right {}
+}
 .date {
     FONT-SIZE: 13px;
     font-weight: bold;
@@ -95,7 +95,7 @@ body[themebg-pattern=theme1]
     color: red;
 }
 
-.nav-menu {}
+
 
 .nav-menu {
     text-align: center !important;
@@ -218,7 +218,7 @@ div#other_news .news_title span {
     font-size: 18px;
 }
 
-.news_cat_box {}
+
 
 .news_cat_box .news_title span {
     font-size: 13px;
@@ -250,7 +250,7 @@ div#other_news .news_title span {
     transform: scale(1.1);
 }
 
-.photo_big {}
+
 
 .photo_big b {
     position: absolute;
@@ -336,7 +336,7 @@ div#other_news .news_title span {
     display: inline-block;
     /* list-style: none; */
     padding: 11px;
-}.links-page {}
+}
 
 .page_links {
     border-top: 1px dashed lightgray;

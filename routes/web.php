@@ -147,5 +147,9 @@ Route::post('/vedioStore',[App\Http\Controllers\vedioController::class, 'store']
 Route::get('/viewVedio',[App\Http\Controllers\vedioController::class, 'view']);
 Route::get('/editVedio/{id}',[App\Http\Controllers\vedioController::class, 'edit']);
 Route::post('/vedioUpdate/{id}',[App\Http\Controllers\vedioController::class, 'update']);
-Route::get('/deleteVedio/{id}',[App\Http\Controllers\vedioController::class, 'delete']);
+
+// settings
+Route::get('/settings',[App\Http\Controllers\settingsController::class, 'index']);
+Route::post('/settingsStore',[App\Http\Controllers\settingsController::class, 'store']);
+
 
