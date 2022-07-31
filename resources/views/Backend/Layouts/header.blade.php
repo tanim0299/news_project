@@ -90,6 +90,9 @@
 	body select h1 h2 h3 h4 h5 h6{
             font-family: 'AdorshoLipi', sans-serif;
         }
+        h3.m-b-0.f-w-700.text-white {
+    margin-top: 0px;
+}
         ul.nav-right {
     margin-top: 0px;
 }

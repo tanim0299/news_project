@@ -12,6 +12,10 @@ body[themebg-pattern=theme1]
             width: 100%;
         }
 
+        .news_title.third b {
+            font-size: 15px;
+        }
+
         .logo {
             text-align: center;
         }

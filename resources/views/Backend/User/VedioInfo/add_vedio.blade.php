@@ -8,10 +8,10 @@
 <div class="page-header-title">
 <!-- <i class="feather icon-home bg-c-blue"></i> -->
 <div class="d-inline">
-<h5>Edit Image</h5>
+<h5>Add Vedio</h5>
 <!-- <span>This Is SBIT Dashboard</span> -->
 <div class="links" style="margin-top: 20px;">
-    <a href="{{url('viewImage')}}" class="btn btn-outline-info">View Image</a>
+    <a href="{{url('viewVedio')}}" class="btn btn-outline-info">View Vedio</a>
 </div>
 </div>
 </div>
@@ -29,7 +29,7 @@
  <div class="form-body">
     <div class="card">
         <div class="card-header">
-             <h5>Edit Image</h5>
+             <h5>Add Vedio</h5>
         </div>
         <div class="card-block">
             @if ($errors->any())
@@ -52,33 +52,27 @@
                         <strong>{{Session::get('error')}}</strong>
                 </div>
                 @endif
-            <div class="input-single-box">
-                <form enctype="multipart/form-data" id="uploadImages" method="POST" >
-                    <label> Select Images</label>
-                    <input type="file" class="" name="images[]" multiple  id="images">
-                    <input type="submit" class=" btn btn-success"  value="+ Add Image"  >
-                </form>
-            </div>
-            @if($data)
-            <form method="POST" enctype="multipart/form-data" action="{{url('/imageUpdate')}}/{{$data->id}}">
+            <form method="POST" enctype="multipart/form-data" action="{{url('/vedioStore')}}">
                 @csrf
                 <div class="input-single-box">
-                    <label>Date</label>
-                    <input type="text" name="date" class="form-control" value="{{$data->date}}" id="dateTimePicker" autocomplete="off">
+                    <label>Serial No</label>
+                    <input type="text" name="sl" class="form-control" value="{{old('sl')}}">
                 </div>
                 <div class="input-single-box">
-                    <label>Title</label>
-                    <input type="text" name="title" class="form-control" value="{{$data->title}}">
+                    <label>Youtube Link</label>
+                    <textarea class="form-control" name="youtube_link"></textarea>
                 </div>
-                <input type="text" name="admin_id" class="form-control" value="{{Auth()->user()->id}}" hidden>
-                <div class="image_data" style="margin-top:20px;">
-                    
+                <div class="input-single-box">
+                    <label>Status</label>
+                    <select class="form-control" name="status"> 
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
                 </div>
                 <div class="input-single-box">
                     <input type="submit" name="submit" class="btn btn-success">
                 </div>
             </form>
-            @endif
         </div>
     </div> 
  </div>

@@ -16,6 +16,8 @@ class imageUploadController extends Controller
     }
     public function index()
     {
+        Session::regenerate();
+        current_image::truncate();
         return view('Backend.User.ImageInfo.add_image');
     }
     public function uploadCurrentImage(Request $request)
@@ -141,7 +143,9 @@ class imageUploadController extends Controller
     {
         $data = photo_gallery::find($id);
         $session_id = Session::getId();
-        $get_photo = photo_gallery_info::where('photo_gallery_id',$id)->get();
+        $delete_current_data = current_image::truncate();
+        $status_change = photo_gallery_info::where('photo_gallery_id',$id)->update(['status'=>0]);
+        $get_photo = photo_gallery_info::where('photo_gallery_id',$id)->where('status',0)->get();
         if($get_photo)
         {
             foreach($get_photo as $images)
@@ -153,7 +157,7 @@ class imageUploadController extends Controller
                     'image'=>$images->image,
                 ]);
             }
-            photo_gallery_info::where('photo_gallery_id',$id)->delete();
+            photo_gallery_info::where('photo_gallery_id',$id)->update(['status'=>1]);
         }
 
         return view('Backend.User.ImageInfo.edit_image',compact('data'));
@@ -171,6 +175,7 @@ class imageUploadController extends Controller
 
         if($update) 
         {
+            photo_gallery_info::where('photo_gallery_id',$id)->delete();
             if(count($request->image) > 0)
             {
                 for ($i=0; $i < count($request->image) ; $i++) 

@@ -20,6 +20,7 @@ class CreatePhotoGalleryInfosTable extends Migration
             $table->longText('caption')->nullable();
             $table->string('click_by',200)->nullable();
             $table->string('image');
+            $table->integer('status')->default(1)->nullable();
             $table->timestamps();
         });
     }

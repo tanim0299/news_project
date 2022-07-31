@@ -14,8 +14,8 @@ class homeController extends Controller
     {
         $news_cat_first = news_categorey::where('status','1')->take(2)->get();
         $news_cat_second = news_categorey::where('status','1')->skip(2)->take(2)->get();
-        $news_cat_third = news_categorey::where('status','1')->skip(4)->take(4)->get();
-        $news_cat_fourth = news_categorey::where('status','1')->skip(8)->take(1)->get();
+        $news_cat_third = news_categorey::where('status','1')->skip(4)->take(12)->get();
+        $news_cat_fourth = news_categorey::where('status','1')->skip(12)->take(30)->get();
         
         return view('Frontend.Layouts.home',compact('news_cat_first','news_cat_second','news_cat_third','news_cat_fourth'));
     }
@@ -40,5 +40,10 @@ class homeController extends Controller
     {
         $sub_menu_info = news_sub_menu::find($id);
         return view('Frontend.User.sub_menu_news',compact('sub_menu_info'));
+    }
+    public function categorey_news($id)
+    {
+        $categorey_info = news_categorey::find($id);
+        return view('Frontend.User.categorey_news',compact('categorey_info'));
     }
 }

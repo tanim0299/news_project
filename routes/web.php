@@ -26,6 +26,7 @@ Route::get('/latest',[homeController::class,'latest']);
 
 Route::get('/menu_news/{id}',[homeController::class,'menu_news']);
 Route::get('/sub_menu_news/{id}',[homeController::class,'sub_menu_news']);
+Route::get('/categorey_news/{id}',[homeController::class,'categorey_news']);
 
 Auth::routes();
 
@@ -138,4 +139,13 @@ Route::get('/viewImage',[App\Http\Controllers\imageUploadController::class, 'vie
 Route::get('/editImage/{id}',[App\Http\Controllers\imageUploadController::class, 'edit']);
 Route::post('/imageUpdate/{id}',[App\Http\Controllers\imageUploadController::class, 'update']);
 Route::get('/deleteImage/{id}',[App\Http\Controllers\imageUploadController::class, 'delete']);
+
+
+// vedio controller
+Route::get('/addVedio',[App\Http\Controllers\vedioController::class, 'index']);
+Route::post('/vedioStore',[App\Http\Controllers\vedioController::class, 'store']);
+Route::get('/viewVedio',[App\Http\Controllers\vedioController::class, 'view']);
+Route::get('/editVedio/{id}',[App\Http\Controllers\vedioController::class, 'edit']);
+Route::post('/vedioUpdate/{id}',[App\Http\Controllers\vedioController::class, 'update']);
+Route::get('/deleteVedio/{id}',[App\Http\Controllers\vedioController::class, 'delete']);
 

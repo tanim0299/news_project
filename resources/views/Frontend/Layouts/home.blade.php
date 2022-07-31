@@ -79,7 +79,7 @@
 						</div>
 						<div class="col-lg-4 col-md-6 col-12">
 							<div class="view-all" style="text-align:right;">
-								<a href="#" class="btn btn-outline-primary">সবগুলো</a>
+								<a href="{{url('/categorey_news')}}/{{$show_cat->id}}" class="btn btn-outline-primary">সবগুলো</a>
 							</div>
 						</div>
 					</div>
@@ -248,7 +248,7 @@
 						</div>
 						<div class="col-lg-4 col-md-6 col-12">
 							<div class="view-all" style="text-align:right;">
-								<a href="#" class="btn btn-outline-primary">সবগুলো</a>
+								<a href="{{url('/categorey_news')}}/{{$show_cat->id}}" class="btn btn-outline-primary">সবগুলো</a>
 							</div>
 						</div>
 					</div>
@@ -431,7 +431,7 @@
 						</div>
 						<div class="col-lg-4 col-md-6 col-12">
 							<div class="view-all" style="text-align:right;">
-								<a href="#" class="btn btn-outline-primary">সবগুলো</a>
+								<a href="{{url('/categorey_news')}}/{{$show_cat->id}}" class="btn btn-outline-primary">সবগুলো</a>
 							</div>
 						</div>
 					</div>

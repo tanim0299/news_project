@@ -6,7 +6,7 @@ $count = news_categorey::count();
 $skip = 9;
 
 $limit =$count-$skip;
-$news_cat_footer = news_categorey::where('status','1')->skip($skip)->take($limit)->get();
+$news_cat_footer = news_categorey::where('status','1')->skip(30)->take(30)->get();
 @endphp
 <footer class="footer-area">
 	<div class="footer-wrapper">
@@ -20,7 +20,7 @@ $news_cat_footer = news_categorey::where('status','1')->skip($skip)->take($limit
 					@foreach($news_cat_footer as $show_cat)
 					<div class="col-lg-2 col-md-4 col-6">
 						<div class="other_cat_link">
-							<a href="#">
+							<a href="{{url('categorey_news')}}/{{$show_cat->id}}">
 								{{$show_cat->cat_name}}
 							</a>
 						</div>
