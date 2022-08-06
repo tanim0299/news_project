@@ -27,8 +27,16 @@ class homeController extends Controller
         $news_cat_second = news_categorey::where('status','1')->skip(2)->take(2)->get();
         $news_cat_third = news_categorey::where('status','1')->skip(4)->take(12)->get();
         $news_cat_fourth = news_categorey::where('status','1')->skip(12)->take(30)->get();
+
+        $top_head_news = news_information::where('news_type','top_news')->orderBy('id','DESC')->take(1)->get();
+
+        $others_top_news = news_information::where('news_type','top_news')->orderBy('id','DESC')->skip(1)->take(30)->get();
+
+        $news_image = news_image::all();
+
+        // return $top_head_news;
         
-        return view('Frontend.Layouts.home',compact('news_cat_first','news_cat_second','news_cat_third','news_cat_fourth'));
+        return view('Frontend.Layouts.home',compact('news_cat_first','news_cat_second','news_cat_third','news_cat_fourth','top_head_news','news_image','others_top_news'));
     }
     public function latest()
     {

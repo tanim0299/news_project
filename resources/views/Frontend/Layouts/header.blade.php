@@ -3,6 +3,7 @@ use Rakibhstu\Banglanumber\NumberToBangla;
 use App\Models\news_categorey;
 use App\Models\news_menu;
 use App\Models\website_settings;
+use App\Models\news_image;
 
 
 $settings = website_settings::find(1)->first();

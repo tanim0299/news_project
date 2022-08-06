@@ -1,19 +1,27 @@
 @extends('Frontend.Layouts.master')
 @section('body')
+@php
+use App\Models\news_image;
+@endphp
 <div class="container-fluid">
 	<div class="body-wrapper">
 		<div class="row">
 			<div class="col-lg-9 col-md-9 col-12">
 				<div class="last_news">
 					<div class="row">
+						@if($top_head_news)
+						@foreach($top_head_news as $shownews)
 						<div class="col-lg-8" id="">
 							<div class="news_box" id="heading">
 								<a href="#">
 									<div class="row">
 										<div class="col-7">
 											<div class="news_title">
-												 <b>ঢাকার কোন এলাকায় কখন বিদ্যুৎ যাবে আজ</b><br>
-												 <span>ডিপিডিসি ও ডেসকোর আওতাভুক্ত রাজধানীর যেসব এলাকায় আজ বৃহস্পতিবার লোডশেডিং হবে</span>
+												 <b>{{$shownews->title}}</b><br>
+												 @php
+												 $description = Str::limit($shownews->description,80);
+												 @endphp
+												 <div class="description"><p>{{$description}}</p></div>
 												 <div class="pub-date">
 												 	<span>১৩ জুলাই ২০২২</span>
 												 </div>
@@ -21,37 +29,32 @@
 										</div>
 										<div class="col-5">
 											<div class="news_image">
-												<img src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fb009e92d-65cd-43f3-b2a5-f5e73d26f10e%2FCapture.JPG?rect=135%2C0%2C866%2C577&auto=format%2Ccompress&fmt=webp&format=webp&w=320&dpr=1.0" class="img-fluid">
+												@php
+												$news_image = news_image::where('news_id',$shownews->id)->first();
+												@endphp
+												<img src="{{asset('public/newsImage')}}/{{$news_image->image}}" class="img-fluid">
 											</div>
 										</div>
 									</div>
+									
 								</a>
 							</div>
 						</div>
+						@endforeach
+						@endif
+						@if($others_top_news)
+						@foreach($others_top_news as $show_others)
 						<div class="col-lg-4 col-md-12" id="">
 							<div class="news_box" id="other_news">
 								<a href="#">
 									<div class="row">
 										<div class="col-12">
 											<div class="news_title">
-												 <b>ঢাকার কোন এলাকায় কখন বিদ্যুৎ যাবে আজ</b><br>
-												 <span>ডিপিডিসি ও ডেসকোর আওতাভুক্ত রাজধানীর যেসব এলাকায় আজ বৃহস্পতিবার লোডশেডিং হবে</span>
-												 <div class="pub-date">
-												 	<span>১৩ জুলাই ২০২২</span>
-												 </div>
-											</div>
-										</div>
-									</div>
-								</a>
-							</div>
-						</div><div class="col-lg-4 col-md-12" id="">
-							<div class="news_box" id="other_news">
-								<a href="#">
-									<div class="row">
-										<div class="col-12">
-											<div class="news_title">
-												 <b>ঢাকার কোন এলাকায় কখন বিদ্যুৎ যাবে আজ</b><br>
-												 <span>ডিপিডিসি ও ডেসকোর আওতাভুক্ত রাজধানীর যেসব এলাকায় আজ বৃহস্পতিবার লোডশেডিং হবে</span>
+												 <b>{{$show_others->title}}</b><br>
+												 @php
+												 $description = Str::limit($show_others->description,320);
+												 @endphp
+												 <div class="description"><p>{{$description}}</p></div>
 												 <div class="pub-date">
 												 	<span>১৩ জুলাই ২০২২</span>
 												 </div>
@@ -61,6 +64,8 @@
 								</a>
 							</div>
 						</div>
+						@endforeach
+						@endif
 					</div>
 				</div>
 			</div>
