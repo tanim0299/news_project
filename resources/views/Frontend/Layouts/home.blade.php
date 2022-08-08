@@ -21,7 +21,7 @@ use App\Models\news_image;
 												 @php
 												 $description = Str::limit($shownews->description,80);
 												 @endphp
-												 <div class="description"><p>{{$description}}</p></div>
+												 <div class="description"><p>{!! $description !!}</p></div>
 												 <div class="pub-date">
 												 	<span>১৩ জুলাই ২০২২</span>
 												 </div>
@@ -52,9 +52,9 @@ use App\Models\news_image;
 											<div class="news_title">
 												 <b>{{$show_others->title}}</b><br>
 												 @php
-												 $description = Str::limit($show_others->description,320);
+												 $description = Str::limit($show_others->description,80);
 												 @endphp
-												 <div class="description"><p>{{$description}}</p></div>
+												 <div class="description"><p>{!! $description !!}</p></div>
 												 <div class="pub-date">
 												 	<span>১৩ জুলাই ২০২২</span>
 												 </div>

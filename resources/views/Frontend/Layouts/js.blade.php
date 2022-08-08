@@ -92,7 +92,11 @@
 
 <script type="text/javascript">
 	
-
+    $('#summernote').summernote({
+     oninit: function() {
+         $("div.note-editor button[data-event='codeview']").click();
+     }
+});
 
 
 </script>

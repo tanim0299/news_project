@@ -493,6 +493,22 @@ instance = new dtsel.DTS('input[id="dateTimePicker2"]',  {
     </script>
 
 
+<script type="text/javascript">
+	
+    $('#summernote').on('summernote.init', function () {
+      $('#summernote').summernote('codeview.activate');
+    }).summernote({
+      height: 300,
+      placeholder: 'Paste content here...',
+      codemirror: { 
+        theme: 'monokai'
+      }
+    });
+
+
+</script>
+
+
 
 
 </body>
