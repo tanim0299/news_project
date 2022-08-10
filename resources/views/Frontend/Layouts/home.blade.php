@@ -187,7 +187,9 @@ use App\Models\news_image;
 											@php
 											$news_image = news_image::where('news_id',$shownews->id)->first();
 											@endphp
+											@if(file_exists($news_image))
 											<img src="{{asset('public/newsImage')}}/{{$news_image->image}}" class="img-fluid">
+											@endif
 							 			</div>
 							 			<div class="news_title">
 											 <b>{{$shownews->title}}</b><br>
@@ -331,7 +333,9 @@ use App\Models\news_image;
 											@php
 											$news_image = news_image::where('news_id',$shownews->id)->first();
 											@endphp
+											@if(file_exists($news_image))
 											<img src="{{asset('public/newsImage')}}/{{$news_image->image}}" class="img-fluid">
+											@endif
 							 			</div>
 							 			<div class="news_title">
 											 <b>{{$shownews->title}}</b><br>
@@ -430,7 +434,9 @@ use App\Models\news_image;
 							@php
 							$news_image = news_image::where('news_id',$shownews->id)->first();
 							@endphp
+							@if(file_exists($news_image))
 							<img src="{{asset('public/newsImage')}}/{{$news_image->image}}" class="img-fluid">
+							@endif
 						</div>
 		 				<div class="news_title third">
 		 					<b>{{$shownews->title}}</b>
@@ -518,7 +524,9 @@ use App\Models\news_image;
 											@php
 											$news_image = news_image::where('news_id',$shownews->id)->first();
 											@endphp
+											@if(file_exists($news_image))
 											<img src="{{asset('public/newsImage')}}/{{$news_image->image}}" class="img-fluid">
+											@endif
 							 			</div>
 							 			<div class="news_title">
 											 <b>{{$shownews->title}}</b><br>
