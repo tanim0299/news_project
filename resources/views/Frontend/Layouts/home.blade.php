@@ -1,8 +1,22 @@
 @extends('Frontend.Layouts.master')
 @section('body')
 @php
-use App\Models\news_image;
+use Illuminate\Http\Request;
 use Rakibhstu\Banglanumber\NumberToBangla;
+use App\Models\news_categorey;
+use App\Models\news_menu;
+use App\Models\news_sub_menu;
+use App\Models\division_information;
+use App\Models\district_information;
+use App\Models\upazila_information;
+use App\Models\news_information;
+use App\Models\news_categorey_info;
+use App\Models\news_menu_info;
+use App\Models\news_sub_menu_info;
+use App\Models\news_division_info;
+use App\Models\news_district_info;
+use App\Models\news_upazila_info;
+use App\Models\news_image;
 @endphp
 <div class="container-fluid">
 	<div class="body-wrapper">
@@ -146,26 +160,51 @@ use Rakibhstu\Banglanumber\NumberToBangla;
 				<div class="cat-news">
 					<div class="row">
 						@php 
-						// $news = news_categorey_info::where()
+						$news = news_categorey_info::where('news_categorey_id',$show_cat->id)
+								->join('news_information','news_information.id','=','news_categorey_info.news_id')
+								->select('news_information.*')
+								->orderBy('news_information.id','DESC')
+								->take(8)
+								->get();
+										
+						@endphp
+						@if($news)
+						@foreach($news as $shownews)
+						@php 
+						$numto = new NumberToBangla();
+
+						$date = $numto->bnNum(substr($shownews->date,8,2));
+
+						$month = $numto->bnMonth(substr($shownews->date,5,2));
+
+						$year = $numto->bnNum(substr($shownews->date,0,4));
 						@endphp
 						 <div class="col-lg-3 col-md-4 col-12">
 						 	<div class="cat_news">
 						 		<div class="news_cat_box">
 						 			<a href="#">
 						 				<div class="news_image">
-							 				<img src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fb009e92d-65cd-43f3-b2a5-f5e73d26f10e%2FCapture.JPG?rect=135%2C0%2C866%2C577&auto=format%2Ccompress&fmt=webp&format=webp&w=320&dpr=1.0" class="img-fluid">
+											@php
+											$news_image = news_image::where('news_id',$shownews->id)->first();
+											@endphp
+											<img src="{{asset('public/newsImage')}}/{{$news_image->image}}" class="img-fluid">
 							 			</div>
 							 			<div class="news_title">
-											 <b>ঢাকার কোন এলাকায় কখন বিদ্যুৎ যাবে আজ</b><br>
-											 <span>ডিপিডিসি ও ডেসকোর আওতাভুক্ত রাজধানীর যেসব এলাকায় আজ বৃহস্পতিবার লোডশেডিং হবে</span>
+											 <b>{{$shownews->title}}</b><br>
+											 @php
+												 $description = Str::limit($show_others->description,80);
+												 @endphp
+												 <div class="description">{!! $description !!}</div>
 											 <div class="pub-date">
-											 	<span>১৩ জুলাই ২০২২</span>
+												<span>{{$date.' '.$month.' '.$year}}</span>
 											 </div>
 										</div>
 						 			</a>
 						 		</div>
 						 	</div>
 						 </div>
+						 @endforeach
+						 @endif
 					</div>
 				</div>
 			</div>
@@ -243,6 +282,7 @@ use Rakibhstu\Banglanumber\NumberToBangla;
 
 
 <!-- categorey news -->
+	<div class="container-fluid">
 		<div class="section">
 			@if($news_cat_second)
 			@foreach($news_cat_second as $show_cat)
@@ -263,78 +303,52 @@ use Rakibhstu\Banglanumber\NumberToBangla;
 				</div>
 				<div class="cat-news">
 					<div class="row">
+						@php 
+						$news = news_categorey_info::where('news_categorey_id',$show_cat->id)
+								->join('news_information','news_information.id','=','news_categorey_info.news_id')
+								->select('news_information.*')
+								->orderBy('news_information.id','DESC')
+								->take(8)
+								->get();
+										
+						@endphp
+						@if($news)
+						@foreach($news as $shownews)
+						@php 
+						$numto = new NumberToBangla();
+
+						$date = $numto->bnNum(substr($shownews->date,8,2));
+
+						$month = $numto->bnMonth(substr($shownews->date,5,2));
+
+						$year = $numto->bnNum(substr($shownews->date,0,4));
+						@endphp
 						 <div class="col-lg-3 col-md-4 col-12">
 						 	<div class="cat_news">
 						 		<div class="news_cat_box">
 						 			<a href="#">
 						 				<div class="news_image">
-							 				<img src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fb009e92d-65cd-43f3-b2a5-f5e73d26f10e%2FCapture.JPG?rect=135%2C0%2C866%2C577&auto=format%2Ccompress&fmt=webp&format=webp&w=320&dpr=1.0" class="img-fluid">
+											@php
+											$news_image = news_image::where('news_id',$shownews->id)->first();
+											@endphp
+											<img src="{{asset('public/newsImage')}}/{{$news_image->image}}" class="img-fluid">
 							 			</div>
 							 			<div class="news_title">
-											 <b>ঢাকার কোন এলাকায় কখন বিদ্যুৎ যাবে আজ</b><br>
-											 <span>ডিপিডিসি ও ডেসকোর আওতাভুক্ত রাজধানীর যেসব এলাকায় আজ বৃহস্পতিবার লোডশেডিং হবে</span>
+											 <b>{{$shownews->title}}</b><br>
+											 @php
+												 $description = Str::limit($show_others->description,80);
+												 @endphp
+												 <div class="description">{!! $description !!}</div>
 											 <div class="pub-date">
-											 	<span>১৩ জুলাই ২০২২</span>
+												<span>{{$date.' '.$month.' '.$year}}</span>
 											 </div>
 										</div>
 						 			</a>
 						 		</div>
 						 	</div>
 						 </div>
-						 <div class="col-lg-3 col-md-4 col-12">
-						 	<div class="cat_news">
-						 		<div class="news_cat_box">
-						 			<a href="#">
-						 				<div class="news_image">
-							 				<img src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fb009e92d-65cd-43f3-b2a5-f5e73d26f10e%2FCapture.JPG?rect=135%2C0%2C866%2C577&auto=format%2Ccompress&fmt=webp&format=webp&w=320&dpr=1.0" class="img-fluid">
-							 			</div>
-							 			<div class="news_title">
-											 <b>ঢাকার কোন এলাকায় কখন বিদ্যুৎ যাবে আজ</b><br>
-											 <span>ডিপিডিসি ও ডেসকোর আওতাভুক্ত রাজধানীর যেসব এলাকায় আজ বৃহস্পতিবার লোডশেডিং হবে</span>
-											 <div class="pub-date">
-											 	<span>১৩ জুলাই ২০২২</span>
-											 </div>
-										</div>
-						 			</a>
-						 		</div>
-						 	</div>
-						 </div>
-						 <div class="col-lg-3 col-md-4 col-12">
-						 	<div class="cat_news">
-						 		<div class="news_cat_box">
-						 			<a href="#">
-						 				<div class="news_image">
-							 				<img src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fb009e92d-65cd-43f3-b2a5-f5e73d26f10e%2FCapture.JPG?rect=135%2C0%2C866%2C577&auto=format%2Ccompress&fmt=webp&format=webp&w=320&dpr=1.0" class="img-fluid">
-							 			</div>
-							 			<div class="news_title">
-											 <b>ঢাকার কোন এলাকায় কখন বিদ্যুৎ যাবে আজ</b><br>
-											 <span>ডিপিডিসি ও ডেসকোর আওতাভুক্ত রাজধানীর যেসব এলাকায় আজ বৃহস্পতিবার লোডশেডিং হবে</span>
-											 <div class="pub-date">
-											 	<span>১৩ জুলাই ২০২২</span>
-											 </div>
-										</div>
-						 			</a>
-						 		</div>
-						 	</div>
-						 </div>
-						 <div class="col-lg-3 col-md-4 col-12">
-						 	<div class="cat_news">
-						 		<div class="news_cat_box">
-						 			<a href="#">
-						 				<div class="news_image">
-							 				<img src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fb009e92d-65cd-43f3-b2a5-f5e73d26f10e%2FCapture.JPG?rect=135%2C0%2C866%2C577&auto=format%2Ccompress&fmt=webp&format=webp&w=320&dpr=1.0" class="img-fluid">
-							 			</div>
-							 			<div class="news_title">
-											 <b>ঢাকার কোন এলাকায় কখন বিদ্যুৎ যাবে আজ</b><br>
-											 <span>ডিপিডিসি ও ডেসকোর আওতাভুক্ত রাজধানীর যেসব এলাকায় আজ বৃহস্পতিবার লোডশেডিং হবে</span>
-											 <div class="pub-date">
-											 	<span>১৩ জুলাই ২০২২</span>
-											 </div>
-										</div>
-						 			</a>
-						 		</div>
-						 	</div>
-						 </div>
+						 @endforeach
+						 @endif
 					</div>
 				</div>
 			</div>
@@ -342,6 +356,7 @@ use Rakibhstu\Banglanumber\NumberToBangla;
 			@endif
 		</div>
 	</div>
+</div>
 </div>
 
 
@@ -398,24 +413,53 @@ use Rakibhstu\Banglanumber\NumberToBangla;
 		 		</div>
 		 	</div>
 		 	<div class="cat-body-third">
+				 @php 
+				 $news = news_categorey_info::where('news_categorey_id',$show_cat->id)
+						->join('news_information','news_information.id','=','news_categorey_info.news_id')
+						->select('news_information.*')
+						->orderBy('news_information.id','DESC')
+						->take(1)
+						->get();
+						// return $shownews;
+				 @endphp
+				 @if($news)
+				 @foreach($news as $shownews)
 		 		<div class="news_cat_box third">
 		 			<a href="#">
-		 				<div class="news_image">
-		 					<img src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fd0ac4f72-6f06-4a9a-8442-397ac3b94bb7%2F1_fi.png?rect=191%2C0%2C1581%2C1054&auto=format%2Ccompress&fmt=webp&format=webp&w=300&dpr=1.0" class="img-fluid">
-		 				</div>
+						<div class="news_image">
+							@php
+							$news_image = news_image::where('news_id',$shownews->id)->first();
+							@endphp
+							<img src="{{asset('public/newsImage')}}/{{$news_image->image}}" class="img-fluid">
+						</div>
 		 				<div class="news_title third">
-		 					<b>নতুন প্রযুক্তি ব্যবহারে বিশ্ববিদ্যালয়কে সক্ষমতা অর্জন করতে হবে: রাষ্ট্রপতি</b>
+		 					<b>{{$shownews->title}}</b>
 		 				</div>
 		 			</a>
 		 		</div>
+				 @endforeach
+				 @endif
 		 		<!-- withoutImage -->
+				 @php 
+				 $shownews_inline = news_categorey_info::where('news_categorey_id',$show_cat->id)
+						->join('news_information','news_information.id','=','news_categorey_info.news_id')
+						->select('news_information.*')
+						->orderBy('news_information.id','DESC')
+						->skip(1)
+						->take(5)
+						->get();
+				 @endphp
+				 @if($shownews_inline)
+				 @foreach($shownews_inline as $shownews)
 		 		<div class="news_cat_box third">
 		 			<a href="#">
 		 				<div class="news_title third">
-		 					<b>ছবি ছাড়া বাকি খবরগুলো</b>
+		 					<b>{{$shownews->title}}</b>
 		 				</div>
 		 			</a>
 		 		</div>
+				 @endforeach
+					 @endif
 		 	</div>
 		 </div>
 		 @endforeach
@@ -446,78 +490,52 @@ use Rakibhstu\Banglanumber\NumberToBangla;
 				</div>
 				<div class="cat-news">
 					<div class="row">
+						@php 
+						$news = news_categorey_info::where('news_categorey_id',$show_cat->id)
+								->join('news_information','news_information.id','=','news_categorey_info.news_id')
+								->select('news_information.*')
+								->orderBy('news_information.id','DESC')
+								->take(8)
+								->get();
+										
+						@endphp
+						@if($news)
+						@foreach($news as $shownews)
+						@php
+						$numto = new NumberToBangla();
+
+						$date = $numto->bnNum(substr($shownews->date,8,2));
+
+						$month = $numto->bnMonth(substr($shownews->date,5,2));
+
+						$year = $numto->bnNum(substr($shownews->date,0,4));
+						@endphp
 						 <div class="col-lg-3 col-md-4 col-12">
 						 	<div class="cat_news">
 						 		<div class="news_cat_box">
 						 			<a href="#">
 						 				<div class="news_image">
-							 				<img src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fb009e92d-65cd-43f3-b2a5-f5e73d26f10e%2FCapture.JPG?rect=135%2C0%2C866%2C577&auto=format%2Ccompress&fmt=webp&format=webp&w=320&dpr=1.0" class="img-fluid">
+											@php
+											$news_image = news_image::where('news_id',$shownews->id)->first();
+											@endphp
+											<img src="{{asset('public/newsImage')}}/{{$news_image->image}}" class="img-fluid">
 							 			</div>
 							 			<div class="news_title">
-											 <b>ঢাকার কোন এলাকায় কখন বিদ্যুৎ যাবে আজ</b><br>
-											 <span>ডিপিডিসি ও ডেসকোর আওতাভুক্ত রাজধানীর যেসব এলাকায় আজ বৃহস্পতিবার লোডশেডিং হবে</span>
+											 <b>{{$shownews->title}}</b><br>
+											 @php
+												 $description = Str::limit($show_others->description,80);
+												 @endphp
+												 <div class="description">{!! $description !!}</div>
 											 <div class="pub-date">
-											 	<span>১৩ জুলাই ২০২২</span>
+												<span>{{$date.' '.$month.' '.$year}}</span>
 											 </div>
 										</div>
 						 			</a>
 						 		</div>
 						 	</div>
 						 </div>
-						 <div class="col-lg-3 col-md-4 col-12">
-						 	<div class="cat_news">
-						 		<div class="news_cat_box">
-						 			<a href="#">
-						 				<div class="news_image">
-							 				<img src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fb009e92d-65cd-43f3-b2a5-f5e73d26f10e%2FCapture.JPG?rect=135%2C0%2C866%2C577&auto=format%2Ccompress&fmt=webp&format=webp&w=320&dpr=1.0" class="img-fluid">
-							 			</div>
-							 			<div class="news_title">
-											 <b>ঢাকার কোন এলাকায় কখন বিদ্যুৎ যাবে আজ</b><br>
-											 <span>ডিপিডিসি ও ডেসকোর আওতাভুক্ত রাজধানীর যেসব এলাকায় আজ বৃহস্পতিবার লোডশেডিং হবে</span>
-											 <div class="pub-date">
-											 	<span>১৩ জুলাই ২০২২</span>
-											 </div>
-										</div>
-						 			</a>
-						 		</div>
-						 	</div>
-						 </div>
-						 <div class="col-lg-3 col-md-4 col-12">
-						 	<div class="cat_news">
-						 		<div class="news_cat_box">
-						 			<a href="#">
-						 				<div class="news_image">
-							 				<img src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fb009e92d-65cd-43f3-b2a5-f5e73d26f10e%2FCapture.JPG?rect=135%2C0%2C866%2C577&auto=format%2Ccompress&fmt=webp&format=webp&w=320&dpr=1.0" class="img-fluid">
-							 			</div>
-							 			<div class="news_title">
-											 <b>ঢাকার কোন এলাকায় কখন বিদ্যুৎ যাবে আজ</b><br>
-											 <span>ডিপিডিসি ও ডেসকোর আওতাভুক্ত রাজধানীর যেসব এলাকায় আজ বৃহস্পতিবার লোডশেডিং হবে</span>
-											 <div class="pub-date">
-											 	<span>১৩ জুলাই ২০২২</span>
-											 </div>
-										</div>
-						 			</a>
-						 		</div>
-						 	</div>
-						 </div>
-						 <div class="col-lg-3 col-md-4 col-12">
-						 	<div class="cat_news">
-						 		<div class="news_cat_box">
-						 			<a href="#">
-						 				<div class="news_image">
-							 				<img src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fb009e92d-65cd-43f3-b2a5-f5e73d26f10e%2FCapture.JPG?rect=135%2C0%2C866%2C577&auto=format%2Ccompress&fmt=webp&format=webp&w=320&dpr=1.0" class="img-fluid">
-							 			</div>
-							 			<div class="news_title">
-											 <b>ঢাকার কোন এলাকায় কখন বিদ্যুৎ যাবে আজ</b><br>
-											 <span>ডিপিডিসি ও ডেসকোর আওতাভুক্ত রাজধানীর যেসব এলাকায় আজ বৃহস্পতিবার লোডশেডিং হবে</span>
-											 <div class="pub-date">
-											 	<span>১৩ জুলাই ২০২২</span>
-											 </div>
-										</div>
-						 			</a>
-						 		</div>
-						 	</div>
-						 </div>
+						 @endforeach
+						 @endif
 					</div>
 				</div>
 			</div>

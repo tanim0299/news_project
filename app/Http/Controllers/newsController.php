@@ -471,18 +471,16 @@ class newsController extends Controller
 
         $delete_upazila = news_upazila_info::where('news_id',$id)->delete();
 
-        if($delete_upazila)
-        {
+        
             //delete_district_info
 
             $delete_district = news_district_info::where('news_id',$id)->delete();
-            if($delete_district)
-            {
+            
                 //delete_division_info
 
                 news_division_info::where('news_id',$id)->delete();
-            }
-        }
+            
+        
 
 
         //delete_categorey_info

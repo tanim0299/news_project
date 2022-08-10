@@ -102,4 +102,10 @@ span#select2-student_id-qc-container {
 span.select2-selection.select2-selection--single {
     border: none;
 }
+input.select2-search__field {
+    outline: none;
+}
+.news_image {
+    text-align: center !important;
+}
 	</style>
