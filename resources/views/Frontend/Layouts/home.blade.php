@@ -2,6 +2,7 @@
 @section('body')
 @php
 use App\Models\news_image;
+use Rakibhstu\Banglanumber\NumberToBangla;
 @endphp
 <div class="container-fluid">
 	<div class="body-wrapper">
@@ -15,6 +16,16 @@ use App\Models\news_image;
 							<div class="news_box" id="heading">
 								<a href="#">
 									<div class="row">
+										{{-- 2022-08-08 --}}
+										@php 
+										$numto = new NumberToBangla();
+
+										$date = $numto->bnNum(substr($shownews->date,8,2));
+
+										$month = $numto->bnMonth(substr($shownews->date,5,2));
+
+										$year = $numto->bnNum(substr($shownews->date,0,4));
+										@endphp
 										<div class="col-7">
 											<div class="news_title">
 												 <b>{{$shownews->title}}</b><br>
@@ -23,7 +34,8 @@ use App\Models\news_image;
 												 @endphp
 												 <div class="description"><p>{!! $description !!}</p></div>
 												 <div class="pub-date">
-												 	<span>১৩ জুলাই ২০২২</span>
+												 	<span>{{$date.' '.$month.' '.$year}}</span>
+												 	{{-- <span>১৩ জুলাই ২০২২</span> --}}
 												 </div>
 											</div>
 										</div>
@@ -50,13 +62,22 @@ use App\Models\news_image;
 									<div class="row">
 										<div class="col-12">
 											<div class="news_title">
+												@php 
+												$numto = new NumberToBangla();
+
+												$date = $numto->bnNum(substr($show_others->date,8,2));
+
+												$month = $numto->bnMonth(substr($show_others->date,5,2));
+
+												$year = $numto->bnNum(substr($show_others->date,0,4));
+												@endphp
 												 <b>{{$show_others->title}}</b><br>
 												 @php
 												 $description = Str::limit($show_others->description,80);
 												 @endphp
 												 <div class="description"><p>{!! $description !!}</p></div>
 												 <div class="pub-date">
-												 	<span>১৩ জুলাই ২০২২</span>
+													<span>{{$date.' '.$month.' '.$year}}</span>
 												 </div>
 											</div>
 										</div>
@@ -68,6 +89,39 @@ use App\Models\news_image;
 						@endif
 					</div>
 				</div>
+			</div>
+			<div class="col-lg-3 col-md-3 col-12">
+				<div class="title">
+					<b>আমার এলাকার খবর</b>
+				</div>
+				<form method="post">
+					<div class="input-signle-box">
+						<select class="form-control js-example-basic-single col-sm-12">
+							<option>বিভাগ</option>
+							@if($divisions)
+							@foreach($divisions as $showdivision)
+							<option value="{{$showdivision->id}}">{{$showdivision->division_name}}</option>
+							@endforeach
+							@endif
+						</select>
+					</div>
+					<div class="input-signle-box">
+						<select class="form-control js-example-basic-single col-sm-12">
+							<option>জেলা</option>
+						</select>
+					</div>
+					<div class="input-signle-box">
+						<select class="form-control js-example-basic-single col-sm-12">
+							<option>উপজেলা</option>
+						</select>
+					</div>
+					<div class="input-signle-box">
+						{{-- <input type="submit" class="btn btn-info btn-block" value="খুঁজুন"> --}}
+						<button type="submit" class="btn btn-info btn-block">
+							<i class="fa fa-search"></i> খুঁজুন
+						</button>
+					</div>
+				</form> 
 			</div>
 		</div>
 		<!-- categorey news -->
@@ -91,60 +145,9 @@ use App\Models\news_image;
 				</div>
 				<div class="cat-news">
 					<div class="row">
-						 <div class="col-lg-3 col-md-4 col-12">
-						 	<div class="cat_news">
-						 		<div class="news_cat_box">
-						 			<a href="#">
-						 				<div class="news_image">
-							 				<img src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fb009e92d-65cd-43f3-b2a5-f5e73d26f10e%2FCapture.JPG?rect=135%2C0%2C866%2C577&auto=format%2Ccompress&fmt=webp&format=webp&w=320&dpr=1.0" class="img-fluid">
-							 			</div>
-							 			<div class="news_title">
-											 <b>ঢাকার কোন এলাকায় কখন বিদ্যুৎ যাবে আজ</b><br>
-											 <span>ডিপিডিসি ও ডেসকোর আওতাভুক্ত রাজধানীর যেসব এলাকায় আজ বৃহস্পতিবার লোডশেডিং হবে</span>
-											 <div class="pub-date">
-											 	<span>১৩ জুলাই ২০২২</span>
-											 </div>
-										</div>
-						 			</a>
-						 		</div>
-						 	</div>
-						 </div>
-						 <div class="col-lg-3 col-md-4 col-12">
-						 	<div class="cat_news">
-						 		<div class="news_cat_box">
-						 			<a href="#">
-						 				<div class="news_image">
-							 				<img src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fb009e92d-65cd-43f3-b2a5-f5e73d26f10e%2FCapture.JPG?rect=135%2C0%2C866%2C577&auto=format%2Ccompress&fmt=webp&format=webp&w=320&dpr=1.0" class="img-fluid">
-							 			</div>
-							 			<div class="news_title">
-											 <b>ঢাকার কোন এলাকায় কখন বিদ্যুৎ যাবে আজ</b><br>
-											 <span>ডিপিডিসি ও ডেসকোর আওতাভুক্ত রাজধানীর যেসব এলাকায় আজ বৃহস্পতিবার লোডশেডিং হবে</span>
-											 <div class="pub-date">
-											 	<span>১৩ জুলাই ২০২২</span>
-											 </div>
-										</div>
-						 			</a>
-						 		</div>
-						 	</div>
-						 </div>
-						 <div class="col-lg-3 col-md-4 col-12">
-						 	<div class="cat_news">
-						 		<div class="news_cat_box">
-						 			<a href="#">
-						 				<div class="news_image">
-							 				<img src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fb009e92d-65cd-43f3-b2a5-f5e73d26f10e%2FCapture.JPG?rect=135%2C0%2C866%2C577&auto=format%2Ccompress&fmt=webp&format=webp&w=320&dpr=1.0" class="img-fluid">
-							 			</div>
-							 			<div class="news_title">
-											 <b>ঢাকার কোন এলাকায় কখন বিদ্যুৎ যাবে আজ</b><br>
-											 <span>ডিপিডিসি ও ডেসকোর আওতাভুক্ত রাজধানীর যেসব এলাকায় আজ বৃহস্পতিবার লোডশেডিং হবে</span>
-											 <div class="pub-date">
-											 	<span>১৩ জুলাই ২০২২</span>
-											 </div>
-										</div>
-						 			</a>
-						 		</div>
-						 	</div>
-						 </div>
+						@php 
+						// $news = news_categorey_info::where()
+						@endphp
 						 <div class="col-lg-3 col-md-4 col-12">
 						 	<div class="cat_news">
 						 		<div class="news_cat_box">

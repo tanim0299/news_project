@@ -55,7 +55,7 @@ $settings = website_settings::find(1);
 
 	<link rel="stylesheet" type="text/css" href="{{asset('public/components')}}/bower_components/switchery/css/switchery.min.css">
 
-	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="{{asset('public/components')}}/bower_components/select2/css/select2.min.css" />
 
 	<link rel="stylesheet" type="text/css" href="{{asset('public')}}/components/css/dtsel.css">
 	<link rel="stylesheet" type="text/css" href="{{asset('public')}}/components/css/style.css">
@@ -69,6 +69,37 @@ $settings = website_settings::find(1);
 
 
 	<style type="text/css">
-		
+		.pub-date span {
+    font-size: 13px !important;
+	font-weight: bold;
+}
+.title b {
+    font-size: 17px;
+}
 
+.title {
+    margin-top: 20px;
+    border-left: 4px solid #00bcd4;
+    padding-left: 10px;
+}
+
+.input-signle-box {
+    margin-top: 34px;
+}
+
+.input-signle-box select {
+}
+span#select2-student_id-qc-container {
+    background: white !important;
+    border: 1px solid lightgray;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    background: white;
+    padding: 4px 13px;
+    border: 1px solid lightgray;
+    box-shadow: none;
+}
+span.select2-selection.select2-selection--single {
+    border: none;
+}
 	</style>

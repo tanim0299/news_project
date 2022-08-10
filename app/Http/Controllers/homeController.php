@@ -34,9 +34,13 @@ class homeController extends Controller
 
         $news_image = news_image::all();
 
+        $divisions = division_information::where('status','1')->get();
+
+        // $newsinfo = news_information::where('status','1')->get();
+
         // return $top_head_news;
         
-        return view('Frontend.Layouts.home',compact('news_cat_first','news_cat_second','news_cat_third','news_cat_fourth','top_head_news','news_image','others_top_news'));
+        return view('Frontend.Layouts.home',compact('news_cat_first','news_cat_second','news_cat_third','news_cat_fourth','top_head_news','news_image','others_top_news','divisions'));
     }
     public function latest()
     {

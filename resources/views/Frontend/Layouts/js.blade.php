@@ -79,8 +79,9 @@
 
 
 
+<script type="text/javascript" src="{{asset('public/components')}}/bower_components/select2/js/select2.full.min.js"></script>
+<script type="text/javascript" src="{{asset('public/components')}}/assets/pages/advance-elements/select2-custom.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script type="text/javascript" src="{{asset('public')}}/components/js/dtsel.js"></script>
 

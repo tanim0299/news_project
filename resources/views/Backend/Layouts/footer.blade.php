@@ -493,7 +493,7 @@ instance = new dtsel.DTS('input[id="dateTimePicker2"]',  {
     </script>
 
 
-<script type="text/javascript">
+{{-- <script type="text/javascript">
 	
     $('#summernote').on('summernote.init', function () {
       $('#summernote').summernote('codeview.activate');
@@ -506,7 +506,7 @@ instance = new dtsel.DTS('input[id="dateTimePicker2"]',  {
     });
 
 
-</script>
+</script> --}}
 
 
 
