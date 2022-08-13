@@ -32,7 +32,9 @@ class homeController extends Controller
 
         $others_top_news = news_information::where('news_type','top_news')->orderBy('id','DESC')->skip(1)->take(30)->get();
 
-        $news_image = news_image::all();
+        $news_image = news_image::where('news_id',31)->first();
+
+        // return $news_image;
 
         $divisions = division_information::where('status','1')->get();
 
@@ -68,5 +70,17 @@ class homeController extends Controller
     {
         $categorey_info = news_categorey::find($id);
         return view('Frontend.User.categorey_news',compact('categorey_info'));
+    }
+    public function getHomeDistrict(Request $request)
+    {
+        $district = district_information::where('division_id',$request->division_id)->get();
+
+        return view('Frontend.Layouts.load_district',compact('district'));
+    }
+    public function getHomeUpzaila(Request $request)
+    {
+        $upazila = upazila_information::where('district_id',$request->district_id)->get();
+
+        return view('Frontend.Layouts.load_upazila',compact('upazila'));
     }
 }

@@ -102,3 +102,76 @@
 
 </script>
 
+<script>
+    $(document).ready(function(){
+
+        $('#division').on('change',function(){
+
+            var div_id = $('#division').val();
+
+            // alert(div_id);
+
+            if(div_id == 'বিভাগ')
+            {
+                alert('যে কোন একটি বিভাগ সিলেক্ট করুন');
+            }
+            else
+            {
+            $.ajax({
+            headers : 
+                {
+                    'X-CSRF-TOKEN' : '{{ csrf_token() }}'
+                },
+
+                url : '{{ url('getHomeDistrict') }}',
+
+                type : 'POST',
+
+                data : {division_id:div_id},
+
+                success : function(data)
+                {
+                    $('#district').html(data);
+                    // console.log(data);
+                }
+            });
+            }
+
+
+        });
+
+
+        $("#district").on('change',function(){
+
+            var dis_id = $(this).val();
+
+            if(dis_id == 'জেলা')
+            {
+                alert('একটি জেলা নির্বাচন করুন');
+            }
+            else
+            {
+                $.ajax({
+                    headers:
+                    {
+                        'X-CSRF-TOKEN' : '{{ csrf_token() }}'
+                    },
+
+                    url : '{{ url('getHomeUpzaila') }}',
+
+                    type : 'POST',
+
+                    data : {district_id:dis_id},
+
+                    success : function(data)
+                    {
+                        $("#upazila").html(data);
+                    }
+                });
+            }
+
+        });
+
+    });
+</script>
+

@@ -148,9 +148,11 @@ color: red;
 }
 
 .news_title b {
-font-size: 25px;
+font-size: 22px;
 }
-
+p{
+    margin:0px !important;
+}
 .news_title span {
 font-size: 14px;
 }

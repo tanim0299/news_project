@@ -28,6 +28,11 @@ Route::get('/menu_news/{id}',[homeController::class,'menu_news']);
 Route::get('/sub_menu_news/{id}',[homeController::class,'sub_menu_news']);
 Route::get('/categorey_news/{id}',[homeController::class,'categorey_news']);
 
+
+
+Route::post('/getHomeDistrict',[homeController::class,'getHomeDistrict']);
+Route::post('/getHomeUpzaila',[homeController::class,'getHomeUpzaila']);
+
 Auth::routes();
 
 Route::get('/dashboard', [App\Http\Controllers\BackendController::class, 'index'])->name('dashboard');

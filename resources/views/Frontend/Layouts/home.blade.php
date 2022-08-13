@@ -55,10 +55,7 @@ use App\Models\news_image;
 										</div>
 										<div class="col-5">
 											<div class="news_image">
-												@php
-												$news_image = news_image::where('news_id',$shownews->id)->first();
-												@endphp
-												<img src="{{asset('public/newsImage')}}/{{$news_image->image}}" class="img-fluid">
+												<img src="{{asset('public/newsImage')}}/{{$shownews->image}}" class="img-fluid">
 											</div>
 										</div>
 									</div>
@@ -110,7 +107,7 @@ use App\Models\news_image;
 				</div>
 				<form method="post">
 					<div class="input-signle-box">
-						<select class="form-control js-example-basic-single col-sm-12">
+						<select class="form-control js-example-basic-single col-sm-12" name="division" id="division">
 							<option>বিভাগ</option>
 							@if($divisions)
 							@foreach($divisions as $showdivision)
@@ -120,12 +117,12 @@ use App\Models\news_image;
 						</select>
 					</div>
 					<div class="input-signle-box">
-						<select class="form-control js-example-basic-single col-sm-12">
+						<select class="form-control js-example-basic-single col-sm-12" name="district" id="district">
 							<option>জেলা</option>
 						</select>
 					</div>
 					<div class="input-signle-box">
-						<select class="form-control js-example-basic-single col-sm-12">
+						<select class="form-control js-example-basic-single col-sm-12" name="upazila" id="upazila">
 							<option>উপজেলা</option>
 						</select>
 					</div>
@@ -185,16 +182,16 @@ use App\Models\news_image;
 						 			<a href="#">
 						 				<div class="news_image">
 											@php
-											$news_image = news_image::where('news_id',$shownews->id)->first();
+											$check = public_path().'/newsImage/'.$shownews->image;
 											@endphp
-											@if(file_exists($news_image))
-											<img src="{{asset('public/newsImage')}}/{{$news_image->image}}" class="img-fluid">
+											@if(file_exists($check))
+											<img src="{{asset('public/newsImage')}}/{{$shownews->image}}" class="img-fluid">
 											@endif
 							 			</div>
 							 			<div class="news_title">
 											 <b>{{$shownews->title}}</b><br>
 											 @php
-												 $description = Str::limit($show_others->description,80);
+												 $description = Str::limit($shownews->description,80);
 												 @endphp
 												 <div class="description">{!! $description !!}</div>
 											 <div class="pub-date">
@@ -306,7 +303,7 @@ use App\Models\news_image;
 				<div class="cat-news">
 					<div class="row">
 						@php 
-						$news = news_categorey_info::where('news_categorey_id',$show_cat->id)
+						$news2 = news_categorey_info::where('news_categorey_id',$show_cat->id)
 								->join('news_information','news_information.id','=','news_categorey_info.news_id')
 								->select('news_information.*')
 								->orderBy('news_information.id','DESC')
@@ -314,8 +311,8 @@ use App\Models\news_image;
 								->get();
 										
 						@endphp
-						@if($news)
-						@foreach($news as $shownews)
+						@if($news2)
+						@foreach($news2 as $shownews)
 						@php 
 						$numto = new NumberToBangla();
 
@@ -331,16 +328,16 @@ use App\Models\news_image;
 						 			<a href="#">
 						 				<div class="news_image">
 											@php
-											$news_image = news_image::where('news_id',$shownews->id)->first();
+											$check = public_path().'/newsImage/'.$shownews->image;
 											@endphp
-											@if(file_exists($news_image))
-											<img src="{{asset('public/newsImage')}}/{{$news_image->image}}" class="img-fluid">
+											@if(file_exists($check))
+											<img src="{{asset('public/newsImage')}}/{{$shownews->image}}" class="img-fluid">
 											@endif
 							 			</div>
 							 			<div class="news_title">
 											 <b>{{$shownews->title}}</b><br>
 											 @php
-												 $description = Str::limit($show_others->description,80);
+												 $description = Str::limit($shownews->description,80);
 												 @endphp
 												 <div class="description">{!! $description !!}</div>
 											 <div class="pub-date">
@@ -418,7 +415,7 @@ use App\Models\news_image;
 		 	</div>
 		 	<div class="cat-body-third">
 				 @php 
-				 $news = news_categorey_info::where('news_categorey_id',$show_cat->id)
+				 $news3 = news_categorey_info::where('news_categorey_id',$show_cat->id)
 						->join('news_information','news_information.id','=','news_categorey_info.news_id')
 						->select('news_information.*')
 						->orderBy('news_information.id','DESC')
@@ -426,16 +423,16 @@ use App\Models\news_image;
 						->get();
 						// return $shownews;
 				 @endphp
-				 @if($news)
-				 @foreach($news as $shownews)
+				 @if($news3)
+				 @foreach($news3 as $shownews)
 		 		<div class="news_cat_box third">
 		 			<a href="#">
 						<div class="news_image">
 							@php
-							$news_image = news_image::where('news_id',$shownews->id)->first();
+							$check = public_path().'/newsImage/'.$shownews->image;
 							@endphp
-							@if(file_exists($news_image))
-							<img src="{{asset('public/newsImage')}}/{{$news_image->image}}" class="img-fluid">
+							@if(file_exists($check))
+							<img src="{{asset('public/newsImage')}}/{{$shownews->image}}" class="img-fluid">
 							@endif
 						</div>
 		 				<div class="news_title third">
@@ -497,7 +494,7 @@ use App\Models\news_image;
 				<div class="cat-news">
 					<div class="row">
 						@php 
-						$news = news_categorey_info::where('news_categorey_id',$show_cat->id)
+						$news4 = news_categorey_info::where('news_categorey_id',$show_cat->id)
 								->join('news_information','news_information.id','=','news_categorey_info.news_id')
 								->select('news_information.*')
 								->orderBy('news_information.id','DESC')
@@ -505,8 +502,8 @@ use App\Models\news_image;
 								->get();
 										
 						@endphp
-						@if($news)
-						@foreach($news as $shownews)
+						@if($news4)
+						@foreach($news4 as $shownews)
 						@php
 						$numto = new NumberToBangla();
 
@@ -522,10 +519,10 @@ use App\Models\news_image;
 						 			<a href="#">
 						 				<div class="news_image">
 											@php
-											$news_image = news_image::where('news_id',$shownews->id)->first();
+											$check = public_path().'/newsImage/'.$shownews->image;
 											@endphp
-											@if(file_exists($news_image))
-											<img src="{{asset('public/newsImage')}}/{{$news_image->image}}" class="img-fluid">
+											@if(file_exists($check))
+											<img src="{{asset('public/newsImage')}}/{{$shownews->image}}" class="img-fluid">
 											@endif
 							 			</div>
 							 			<div class="news_title">

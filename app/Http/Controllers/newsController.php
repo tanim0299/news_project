@@ -114,7 +114,12 @@ class newsController extends Controller
                         'news_id'=>$news_id,
                         'image'=>$name[$i],
                     ]);
+                    news_information::where('id',$news_id)->update([
+                        'image'=>$name[0],
+                    ]);
                 }
+
+
             }
 
         
@@ -310,8 +315,13 @@ class newsController extends Controller
                         'news_id'=>$news_id,
                         'image'=>$name[$i],
                     ]);
+
+                    news_information::where('id',$news_id)->update([
+                        'image'=>$name[0],
+                    ]);
                 }
             }
+            
         }
 
 

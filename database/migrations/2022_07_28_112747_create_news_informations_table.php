@@ -20,6 +20,7 @@ class CreateNewsInformationsTable extends Migration
             $table->string('title');
             $table->longText('description');
             $table->string('reporters_name');
+            $table->string('image')->nullable();
             $table->string('status',10);
             $table->timestamps();
         });
