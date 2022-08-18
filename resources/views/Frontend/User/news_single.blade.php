@@ -40,6 +40,18 @@
     padding: 11px;
     font-size: 12px;
 }
+.print-line li button {
+    text-decoration: none;
+    color: white;
+    padding: 4px 9px;
+    font-size: 12px;
+    border: none;
+    background: none;
+}
+.print-line li button:focus{
+    border: none;
+    outline: none;
+}
 
 .print-line li:first-child {
     background: #0f8ff2;
@@ -95,6 +107,56 @@ ul.uk-lightbox-items img {
 #NewsDescription{
     font-size: 20px !important;
 }
+.comments {
+    margin-top: 29px;
+    border-bottom: 3px solid lightgray;
+    padding-bottom: 21px;
+    font-size: 16px;
+}
+.profile img {
+    height: 80px;
+    width: 80px;
+    border-radius: 100%;
+}
+.post_area{
+    margin-top: 20px;
+}
+.note-btn-group.btn-group.note-style {
+    display: none;
+}
+
+.note-btn-group.btn-group.note-font {
+    display: none;
+}
+
+.note-btn-group.btn-group.note-fontname {
+    display: none;
+}
+
+.note-btn-group.btn-group.note-color {
+    display: none;
+}
+
+.note-btn-group.btn-group.note-table {
+    display: none;
+}
+
+ul.note-dropdown-menu.dropdown-menu {
+    display: none;
+}
+
+button.note-btn.btn.btn-default.btn-sm.btn-fullscreen.note-codeview-keep {
+    display: none;
+}
+
+.note-btn-group.btn-group.note-view {
+    display: none;
+}
+
+.note-statusbar {
+    background: white;
+    /* display: none; */
+}
 @media print
 {
     #left-side{
@@ -127,6 +189,9 @@ ul.uk-lightbox-items img {
     .news_detail-box{
         text-align: center;
     }
+    .comment_area{
+        display: none;
+    }
 }
 </style>
 <div class="container-fluid">
@@ -156,8 +221,8 @@ ul.uk-lightbox-items img {
                     <div class="col-6">
                         <div class="print-line">
                             <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a onclick="increaseFontSizeBy1px()" href="#">অ+</a></li>
-                            <li><a href="#">অ-</a></li>
+                            <li><button onclick="increaseFontSizeBy1px()" href="#">অ+</button></li>
+                            <li><button onclick="decreaseFontSizeBy1px()" href="#">অ-</button></li>
                             <li><a href="#" id="print"><i class="fa fa-print"></i></a></li>
                         </div>
                     </div>
@@ -178,7 +243,7 @@ ul.uk-lightbox-items img {
                             @foreach($otherImg as $showimages)
                             <div>
                                 <a class="uk-inline" href="{{asset('public/newsImage')}}/{{$showimages->image}}" data-caption="">
-                                    <img src="{{asset('public/newsImage')}}/{{$showimages->image}}" width="650" height="400" alt="" class="d-none" id="newssingle_image">
+                                    <img src="{{asset('public/newsImage')}}/{{$showimages->image}}" width="400" height="400" alt="" class="d-none" id="newssingle_image">
                                 </a>
                             </div>
                             @endforeach
@@ -187,6 +252,34 @@ ul.uk-lightbox-items img {
                 </div>
                 <div class="news_description" id="NewsDescription">
                     {!! $data->description !!}
+                    <div class="comment_area">
+                        <div class="title">
+                            <b>মন্তব্য করুন</b>
+                        </div>
+                        <div class="comments">
+                            <b>7 Comments</b>
+                        </div>
+                        <div class="post_area">
+                            <div class="row">
+                                <div class="col-12" style="margin-right: 0px;">
+                                    <div class="d-flex">
+                                        <div class="profile">
+                                            <img src="https://img.freepik.com/premium-vector/avatar-portrait-young-caucasian-boy-man-round-frame-vector-cartoon-flat-illustration_551425-19.jpg?w=2000" class="img-fluid">
+                                        </div>
+                                        <div class="user-info">
+                                            <b>Sumsul Karim</b>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12" style="margin-left: 0px;">
+                                <textarea id="summernote"></textarea>
+                            </div>
+                            <div class="col-12" style="margin-top: 20px;">
+                                <button type="submit" class="btn btn-secondary btn-block"><i class="fa fa-paper-plane"></i>  POST</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -201,16 +294,6 @@ ul.uk-lightbox-items img {
                 <div class="report_by">
                     <b>লিখা: </b>  <span>{{$data->reporters_name}}</span>
                 </div>
-                {{-- @php
-                use Rakibhstu\Banglanumber\NumberToBangla;
-                $numto = new NumberToBangla();
-
-                $date = $numto->bnNum(substr($data->date,8,2));
-
-                $month = $numto->bnMonth(substr($data->date,5,2));
-
-                $year = $numto->bnNum(substr($data->date,0,4));
-                @endphp --}}
                 <div class="row">
                     <div class="pub-date col-12" style="color:gray;">
                         <b>প্রকাশ: </b><span>{{$date.' '.$month.' '.$year}}</span>
@@ -252,6 +335,7 @@ ul.uk-lightbox-items img {
                 </div>
             </div>
         </div>
+        {{-- for print --}}
     </div>
 </div>
 @endsection
