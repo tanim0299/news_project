@@ -36,7 +36,7 @@ $news_menu = news_menu::where('status','1')->get();
 <div class="container-fluid">
 	<div class="header-area" style="margin-top:10px;">
 		<div class="row">
-			<div class="col-lg-3 col-12">
+			<div class="col-lg-3 col-12" id="left-side">
 				<div class="all-news-cat">
 					<button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #offcanvas-usage"><i class="fa fa-bars"></i></button>
 

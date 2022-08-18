@@ -1,5 +1,7 @@
 @php
 use App\Models\news_categorey;
+use App\Models\website_settings;
+
 
 $count = news_categorey::count();
 
@@ -16,12 +18,13 @@ $skip = 9;
 
 $limit =$count-$skip;
 $news_cat_footer = news_categorey::where('status','1')->skip(30)->take(30)->get();
+$settings = website_settings::find(1)->first();
 @endphp
 <footer class="footer-area">
 	<div class="footer-wrapper">
 		<div class="container-fluid">
 			<div class="logo_footer">
-				<img src="{{asset('public/components')}}/Images/logo.png" class="img-fluid">
+				<a href="{{url('/')}}"><img src="{{asset('public/components')}}/Images/{{$settings->image}}" class="img-fluid"></a>
 			</div>
 			<div class="other_cat">
 				<div class="row">

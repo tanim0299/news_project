@@ -83,4 +83,11 @@ class homeController extends Controller
 
         return view('Frontend.Layouts.load_upazila',compact('upazila'));
     }
+    public function news_single($id)
+    {
+        $data = news_information::find($id);
+        $images = news_image::where('news_id',$id)->first();
+        $otherImg = news_image::where('news_id',$id)->skip(1)->take(200)->get();
+        return view('Frontend.User.news_single',compact('data','images','otherImg'));
+    }
 }

@@ -28,7 +28,7 @@ use App\Models\news_image;
 						@foreach($top_head_news as $shownews)
 						<div class="col-lg-8" id="">
 							<div class="news_box" id="heading">
-								<a href="#">
+								<a href="{{url('news_detail')}}/{{$shownews->id}}">
 									<div class="row">
 										{{-- 2022-08-08 --}}
 										@php 
@@ -66,25 +66,25 @@ use App\Models\news_image;
 						@endforeach
 						@endif
 						@if($others_top_news)
-						@foreach($others_top_news as $show_others)
+						@foreach($others_top_news as $shownews)
 						<div class="col-lg-4 col-md-12" id="">
 							<div class="news_box" id="other_news">
-								<a href="#">
+								<a href="{{url('news_detail')}}/{{$shownews->id}}">
 									<div class="row">
 										<div class="col-12">
 											<div class="news_title">
 												@php 
 												$numto = new NumberToBangla();
 
-												$date = $numto->bnNum(substr($show_others->date,8,2));
+												$date = $numto->bnNum(substr($shownews->date,8,2));
 
-												$month = $numto->bnMonth(substr($show_others->date,5,2));
+												$month = $numto->bnMonth(substr($shownews->date,5,2));
 
-												$year = $numto->bnNum(substr($show_others->date,0,4));
+												$year = $numto->bnNum(substr($shownews->date,0,4));
 												@endphp
-												 <b>{{$show_others->title}}</b><br>
+												 <b>{{$shownews->title}}</b><br>
 												 @php
-												 $description = Str::limit($show_others->description,80);
+												 $description = Str::limit($shownews->description,80);
 												 @endphp
 												 <div class="description"><p>{!! $description !!}</p></div>
 												 <div class="pub-date">
@@ -179,7 +179,7 @@ use App\Models\news_image;
 						 <div class="col-lg-3 col-md-4 col-12">
 						 	<div class="cat_news">
 						 		<div class="news_cat_box">
-						 			<a href="#">
+						 			<a href="{{url('news_detail')}}/{{$shownews->id}}">
 						 				<div class="news_image">
 											@php
 											$check = public_path().'/newsImage/'.$shownews->image;
@@ -325,7 +325,7 @@ use App\Models\news_image;
 						 <div class="col-lg-3 col-md-4 col-12">
 						 	<div class="cat_news">
 						 		<div class="news_cat_box">
-						 			<a href="#">
+						 			<a href="{{url('news_detail')}}/{{$shownews->id}}">
 						 				<div class="news_image">
 											@php
 											$check = public_path().'/newsImage/'.$shownews->image;
@@ -426,7 +426,7 @@ use App\Models\news_image;
 				 @if($news3)
 				 @foreach($news3 as $shownews)
 		 		<div class="news_cat_box third">
-		 			<a href="#">
+		 			<a href="{{url('news_detail')}}/{{$shownews->id}}">
 						<div class="news_image">
 							@php
 							$check = public_path().'/newsImage/'.$shownews->image;
@@ -455,7 +455,7 @@ use App\Models\news_image;
 				 @if($shownews_inline)
 				 @foreach($shownews_inline as $shownews)
 		 		<div class="news_cat_box third">
-		 			<a href="#">
+		 			<a href="{{url('news_detail')}}/{{$shownews->id}}">
 		 				<div class="news_title third">
 		 					<b>{{$shownews->title}}</b>
 		 				</div>
@@ -516,7 +516,7 @@ use App\Models\news_image;
 						 <div class="col-lg-3 col-md-4 col-12">
 						 	<div class="cat_news">
 						 		<div class="news_cat_box">
-						 			<a href="#">
+						 			<a href="{{url('news_detail')}}/{{$shownews->id}}">
 						 				<div class="news_image">
 											@php
 											$check = public_path().'/newsImage/'.$shownews->image;
@@ -528,7 +528,7 @@ use App\Models\news_image;
 							 			<div class="news_title">
 											 <b>{{$shownews->title}}</b><br>
 											 @php
-												 $description = Str::limit($show_others->description,80);
+												 $description = Str::limit($shownews->description,80);
 												 @endphp
 												 <div class="description">{!! $description !!}</div>
 											 <div class="pub-date">

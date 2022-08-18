@@ -175,3 +175,27 @@
     });
 </script>
 
+
+<script>
+    $(document).ready(function(){
+
+        $('#print').on('click',function(e){
+            e.preventDefault();
+            window.print();
+        });
+
+
+       
+
+    });
+</script>
+
+<script>
+    function increaseFontSizeBy1px() {
+    txt = document.getElementByTaName('p');
+    style = window.getComputedStyle(txt, null).getPropertyValue('font-size');
+    currentSize = parseFloat(style);
+    txt.style.fontSize = (currentSize + 1) + 'px';
+}
+</script>
+

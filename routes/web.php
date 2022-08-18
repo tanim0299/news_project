@@ -24,6 +24,9 @@ Route::get('/',[homeController::class,'index']);
 Route::get('/latest',[homeController::class,'latest']);
 
 
+Route::get('/news_detail/{id}',[homeController::class,'news_single']);
+
+
 Route::get('/menu_news/{id}',[homeController::class,'menu_news']);
 Route::get('/sub_menu_news/{id}',[homeController::class,'sub_menu_news']);
 Route::get('/categorey_news/{id}',[homeController::class,'categorey_news']);
