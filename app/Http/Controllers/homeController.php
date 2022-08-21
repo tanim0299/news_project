@@ -46,7 +46,9 @@ class homeController extends Controller
     }
     public function latest()
     {
-        return view('Frontend.User.latest');
+        $news = news_information::orderBy('id','DESC')->simplePaginate(20);
+        
+        return view('Frontend.User.latest',compact('news'));
     }
     public function menu_news($id)
     {
@@ -55,11 +57,17 @@ class homeController extends Controller
         $news_sub_menu = news_sub_menu::join('news_menu','news_menu.id','=','news_sub_menu.news_menuid')
                          ->where('news_sub_menu.news_menuid',$id)
                          ->select('news_sub_menu.*','news_menu.link_name')
-                         ->get();
+                         ->simplePaginate(0);
 
         // return $news_sub_menu;
 
-        return view('Frontend.User.menu_news',compact('menu_info','news_sub_menu'));
+        $menu = news_menu_info::where('news_menu_id',$id)->simplePaginate(20);
+        // return $menu;
+        
+
+
+
+        return view('Frontend.User.menu_news',compact('menu_info','news_sub_menu','menu'));
     }
     public function sub_menu_news($id)
     {
@@ -69,7 +77,9 @@ class homeController extends Controller
     public function categorey_news($id)
     {
         $categorey_info = news_categorey::find($id);
-        return view('Frontend.User.categorey_news',compact('categorey_info'));
+
+        $categorey = news_categorey_info::where('news_categorey_id',$id)->simplePaginate(20);
+        return view('Frontend.User.categorey_news',compact('categorey_info','categorey'));
     }
     public function getHomeDistrict(Request $request)
     {
@@ -88,6 +98,10 @@ class homeController extends Controller
         $data = news_information::find($id);
         $images = news_image::where('news_id',$id)->first();
         $otherImg = news_image::where('news_id',$id)->skip(1)->take(200)->get();
-        return view('Frontend.User.news_single',compact('data','images','otherImg'));
+        $news_categoreys = news_categorey_info::where('news_id',$id)
+                            ->join('news_categorey','news_categorey.id','=','news_categorey_info.news_categorey_id')
+                            ->select('news_categorey.cat_name','news_categorey.id')->get();
+        $news_id = $id;
+        return view('Frontend.User.news_single',compact('data','images','otherImg','news_categoreys','news_id'));
     }
 }

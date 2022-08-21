@@ -1,5 +1,23 @@
 @extends('Frontend.Layouts.master')
 @section('body')
+@php
+use Illuminate\Http\Request;
+use Rakibhstu\Banglanumber\NumberToBangla;
+use App\Models\news_categorey;
+use App\Models\news_menu;
+use App\Models\news_sub_menu;
+use App\Models\division_information;
+use App\Models\district_information;
+use App\Models\upazila_information;
+use App\Models\news_information;
+use App\Models\news_categorey_info;
+use App\Models\news_menu_info;
+use App\Models\news_sub_menu_info;
+use App\Models\news_division_info;
+use App\Models\news_district_info;
+use App\Models\news_upazila_info;
+use App\Models\news_image;
+@endphp
 <style>
     .news-title {
     margin-top: 20px;
@@ -60,19 +78,19 @@
     padding: 5px 3px;
 }
 .print-line li:nth-child(2) {
-    background: #0f8ff2;
+    background: #079111;
     color: white !important;
     border-radius: 22px;
     padding: 5px 3px;
 }
 .print-line li:nth-child(3) {
-    background: #0f8ff2;
+    background: #f20f4f;
     color: white !important;
     border-radius: 22px;
     padding: 5px 3px;
 }
 .print-line li:last-child {
-    background: #0f8ff2;
+    background: #000000;
     color: white !important;
     border-radius: 22px;
     padding: 5px 3px;
@@ -157,8 +175,65 @@ button.note-btn.btn.btn-default.btn-sm.btn-fullscreen.note-codeview-keep {
     background: white;
     /* display: none; */
 }
-@media print
+.user-info {
+    margin-top: 23px;
+}
+.right-side {
+    margin-top: 13px;
+}
+.post-detail {
+    font-size: 13px;
+    margin-top : 10px;
+}
+.post-single {
+    margin-top: 20px;
+    border-top: 1px solid lightgray;
+    padding: 3px 14px;
+    background: #f1f1f1;
+    border-radius: 12px;
+}
+li.news-box {
+    list-style: none;
+    margin-top: 15px;
+    border-bottom: 1px solid lightgray;
+    padding: 0px;
+    margin-bottom: 16px;
+    height: 120px;;
+}
+div#box {
+    margin-top: 101px;
+}
+
+.cat-heading {
+    margin-top: 20px;
+}
+
+.news_title b {
+    font-size: 16px;
+}
+
+.news_image img {
+    max-width: 127px;
+    max-height: 88px;
+}
+
+.right-side {
+    margin-left: 14px;
+}
+b.sec-title {
+    font-size: 23px;
+    /* background: lightgray; */
+}
+@media  print
 {
+    .print-d-none{
+        display: none;
+    }
+    #newssingle_image
+    {
+        height: 400px;
+        width:100%;
+    }
     #left-side{
         display:none;
     }
@@ -196,7 +271,7 @@ button.note-btn.btn.btn-default.btn-sm.btn-fullscreen.note-codeview-keep {
 </style>
 <div class="container-fluid">
 	<div class="row">
-        <div class="col-lg-9 col-md-9 col-12" id="web_body">
+        <div class="col-lg-8 col-md-8 col-12" id="web_body">
             <div class="news_detail-box">
                 <div class="news-title">
                     <b>{{$data->title}}</b>
@@ -205,7 +280,8 @@ button.note-btn.btn.btn-default.btn-sm.btn-fullscreen.note-codeview-keep {
                     <b>লিখা: </b>  <span>{{$data->reporters_name}}</span>
                 </div>
                 @php
-                use Rakibhstu\Banglanumber\NumberToBangla;
+                // use Rakibhstu\Banglanumber\NumberToBangla;
+
                 $numto = new NumberToBangla();
 
                 $date = $numto->bnNum(substr($data->date,8,2));
@@ -213,6 +289,7 @@ button.note-btn.btn.btn-default.btn-sm.btn-fullscreen.note-codeview-keep {
                 $month = $numto->bnMonth(substr($data->date,5,2));
 
                 $year = $numto->bnNum(substr($data->date,0,4));
+
                 @endphp
                 <div class="row">
                     <div class="pub-date col-6" style="color:gray;">
@@ -260,28 +337,105 @@ button.note-btn.btn.btn-default.btn-sm.btn-fullscreen.note-codeview-keep {
                             <b>7 Comments</b>
                         </div>
                         <div class="post_area">
-                            <div class="row">
-                                <div class="col-12" style="margin-right: 0px;">
-                                    <div class="d-flex">
-                                        <div class="profile">
-                                            <img src="https://img.freepik.com/premium-vector/avatar-portrait-young-caucasian-boy-man-round-frame-vector-cartoon-flat-illustration_551425-19.jpg?w=2000" class="img-fluid">
-                                        </div>
-                                        <div class="user-info">
-                                            <b>Sumsul Karim</b>
+                            <form method="post" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-12" style="padding: 0px;">
+                                        <div class="d-flex">
+                                            <div class="profile">
+                                                <img src="https://img.freepik.com/premium-vector/avatar-portrait-young-caucasian-boy-man-round-frame-vector-cartoon-flat-illustration_551425-19.jpg?w=2000" class="img-fluid">
+                                            </div>
+                                            <div class="user-info">
+                                                <b>Sumsul Karim</b>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12" style="margin-left: 0px;">
-                                <textarea id="summernote"></textarea>
-                            </div>
-                            <div class="col-12" style="margin-top: 20px;">
-                                <button type="submit" class="btn btn-secondary btn-block"><i class="fa fa-paper-plane"></i>  POST</button>
+                                <div class="col-12" style="padding: 0px;">
+                                    <textarea id="summernote"></textarea>
+                                </div>
+                                <div class="col-12" style="padding: 0px;margin-top:10px;">
+                                    <button type="submit" class="btn btn-secondary btn-block"><i class="fa fa-paper-plane"></i>  POST</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="posted_view">
+                            <div class="post-single">
+                                <div class="d-flex">
+                                    <div class="profile">
+                                        <img src="https://img.freepik.com/premium-vector/avatar-portrait-young-caucasian-boy-man-round-frame-vector-cartoon-flat-illustration_551425-19.jpg?w=2000" class="img-fluid">
+                                    </div>
+                                    <div class="right-side">
+                                        <b>Sumsul Karim</b><br>
+                                        <div class="post-detail">jhkdhfksdjhfkdasfljsdjkf</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-12 print-d-none" id="box">
+            <b class="sec-title">আরও দেখুন</b>
+            @if($news_categoreys)
+            @foreach($news_categoreys as $show_cat)
+            <div class="cat-heading">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-12">
+                        <div class="cat_name">
+                            <b>{{$show_cat->cat_name}}</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cat-bodys">
+                @php 
+                $news2 = news_categorey_info::where('news_categorey_id',$show_cat->id)
+                        ->join('news_information','news_information.id','=','news_categorey_info.news_id')
+                        ->where('news_information.id','!=',$news_id)
+                        ->select('news_information.*')
+                        ->orderBy('news_information.id','DESC')
+                        ->take(8)
+                        ->get();
+										
+                @endphp
+                @if($news2)
+                @foreach($news2 as $shownews)
+                @php 
+                $numto = new NumberToBangla();
+
+                $date = $numto->bnNum(substr($shownews->date,8,2));
+
+                $month = $numto->bnMonth(substr($shownews->date,5,2));
+
+                $year = $numto->bnNum(substr($shownews->date,0,4));
+                @endphp
+						 <li class="news-box">
+                            <a href="{{url('news_detail')}}/{{$shownews->id}}">
+                                <div class="d-flex">
+                                    <div class="news_title">
+                                        <b>{{$shownews->title}}</b><br>
+                                        <div class="pub-date">
+                                            <span>{{$date.' '.$month.' '.$year}}</span>
+                                        </div>
+                                        </div>
+                                        <div class="news_image">
+                                            @php
+                                            $check = public_path().'/newsImage/'.$shownews->image;
+                                            @endphp
+                                            @if(file_exists($check))
+                                            <img src="{{asset('public/newsImage')}}/{{$shownews->image}}" class="img-fluid">
+                                            @endif
+                                        </div>
+                                </div>
+                            </a>
+                         </li>
+						 @endforeach
+						 @endif
+            </div>
+            @endforeach
+            @endif
         </div>
 
 
@@ -323,7 +477,7 @@ button.note-btn.btn.btn-default.btn-sm.btn-fullscreen.note-codeview-keep {
                             @foreach($otherImg as $showimages)
                             <div>
                                 <a class="uk-inline" href="{{asset('public/newsImage')}}/{{$showimages->image}}" data-caption="">
-                                    <img src="{{asset('public/newsImage')}}/{{$showimages->image}}" width="650" height="400" alt="" class="d-none" id="newssingle_image">
+                                    <img src="{{asset('public/newsImage')}}/{{$showimages->image}}" width="400" height="400" alt="" class="d-none" id="newssingle_image">
                                 </a>
                             </div>
                             @endforeach
