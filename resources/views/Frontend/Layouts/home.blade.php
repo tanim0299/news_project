@@ -105,10 +105,22 @@ use App\Models\news_image;
 				<div class="title">
 					<b>আমার এলাকার খবর</b>
 				</div>
-				<form method="post">
+				@if(Session::get('success'))
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert">×</button> 
+                        <strong>{{Session::get('success')}}</strong>
+                </div>
+                @elseif(Session::get('error'))
+                <div class="alert alert-danger alert-block">
+                    <button type="button" class="close" data-dismiss="alert">×</button> 
+                        <strong>{{Session::get('error')}}</strong>
+                </div>
+                @endif
+				<form method="POST" action="{{url('/filter_news')}}">
+					@csrf
 					<div class="input-signle-box">
 						<select class="form-control js-example-basic-single col-sm-12" name="division" id="division">
-							<option>বিভাগ</option>
+							<option value="0">বিভাগ</option>
 							@if($divisions)
 							@foreach($divisions as $showdivision)
 							<option value="{{$showdivision->id}}">{{$showdivision->division_name}}</option>
@@ -118,12 +130,12 @@ use App\Models\news_image;
 					</div>
 					<div class="input-signle-box">
 						<select class="form-control js-example-basic-single col-sm-12" name="district" id="district">
-							<option>জেলা</option>
+							<option value="0">জেলা</option>
 						</select>
 					</div>
 					<div class="input-signle-box">
 						<select class="form-control js-example-basic-single col-sm-12" name="upazila" id="upazila">
-							<option>উপজেলা</option>
+							<option value="0">উপজেলা</option>
 						</select>
 					</div>
 					<div class="input-signle-box">

@@ -104,4 +104,25 @@ class homeController extends Controller
         $news_id = $id;
         return view('Frontend.User.news_single',compact('data','images','otherImg','news_categoreys','news_id'));
     }
+    public function filter_news(Request $request)
+    {
+        // return $request->district;
+        if($request->division == 0 && $request->district == 0 && $request->upazila == 0)
+        {
+            return redirect()->back()->with('error','যে কোন একটি বিভাগ নির্বাচন করুন');
+        }
+        elseif($request->district == 0 && $request->upazila == 0)
+        {
+           $division = "বিভাগ"; 
+           $division_name = division_information::where('id',$request->division)->first();
+           $division_info = news_division_info::where('news_division_id',$request->division)->simplePaginate(20);
+
+        //    dd($division_info);
+            return view('Frontend.User.area_news',compact('division','division_name','division_info'));
+        }
+        else
+        {
+            return 1;
+        }
+    }
 }

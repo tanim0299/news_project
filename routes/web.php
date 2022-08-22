@@ -35,6 +35,7 @@ Route::get('/categorey_news/{id}',[homeController::class,'categorey_news']);
 
 Route::post('/getHomeDistrict',[homeController::class,'getHomeDistrict']);
 Route::post('/getHomeUpzaila',[homeController::class,'getHomeUpzaila']);
+Route::post('/filter_news',[homeController::class,'filter_news']);
 
 Auth::routes();
 
