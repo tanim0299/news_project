@@ -1,130 +1,72 @@
 @extends('Frontend.Layouts.master')
 @section('body')
+@php
+use Illuminate\Http\Request;
+use Rakibhstu\Banglanumber\NumberToBangla;
+use App\Models\news_categorey;
+use App\Models\news_menu;
+use App\Models\news_sub_menu;
+use App\Models\division_information;
+use App\Models\district_information;
+use App\Models\upazila_information;
+use App\Models\news_information;
+use App\Models\news_categorey_info;
+use App\Models\news_menu_info;
+use App\Models\news_sub_menu_info;
+use App\Models\news_division_info;
+use App\Models\news_district_info;
+use App\Models\news_upazila_info;
+use App\Models\news_image;
+@endphp
 @if($sub_menu_info)
 <div class="container">
 
-			<div class="menu_title">
-				<b>{{$sub_menu_info->news_submenu_name}}</b>
-			</div>
-	<div class="menu_news">
-		<div class="menu_box_latest">
-			<div class="news_box menu" id="heading">
-				<a href="#">
-					<div class="row">
-						<div class="col-7">
-							<div class="news_title">
-								 <b>ঢাকার কোন এলাকায় কখন বিদ্যুৎ যাবে আজ</b><br>
-								 <span>ডিপিডিসি ও ডেসকোর আওতাভুক্ত রাজধানীর যেসব এলাকায় আজ বৃহস্পতিবার লোডশেডিং হবে</span>
-								 <div class="pub-date">
-								 	<span>১৩ জুলাই ২০২২</span>
-								 </div>
+		<div class="menu_title">
+			<b>{{$sub_menu_info->news_submenu_name}}</b>
+		</div>
+		<div class="menu_news">
+			<div class="menu_box_latest">
+				@if($sub_menu)
+				@foreach($sub_menu as $showsub_menu)
+				@php 
+				$shownews = news_information::where('id',$showsub_menu->news_id)->first();
+				@endphp
+				<div class="news_box menu" id="heading">
+					<a href="{{url('news_detail')}}/{{$shownews->id}}">
+						<div class="row">
+							<div class="col-7">
+								<div class="news_title">
+									@php 
+									$numto = new NumberToBangla();
+	
+									$date = $numto->bnNum(substr($shownews->date,8,2));
+	
+									$month = $numto->bnMonth(substr($shownews->date,5,2));
+	
+									$year = $numto->bnNum(substr($shownews->date,0,4));
+									@endphp
+										<b>{{$shownews->title}}</b><br>
+										@php
+										$description = Str::limit($shownews->description,80);
+										@endphp
+										<div class="description"><p>{!! $description !!}</p></div>
+										<div class="pub-date">
+										<span>{{$date.' '.$month.' '.$year}}</span>
+										</div>
+								</div>
+							</div>
+							<div class="col-5">
+								<div class="news_image">
+									<img src="{{asset('public/newsImage')}}/{{$shownews->image}}" class="img-fluid">
+								</div>
 							</div>
 						</div>
-						<div class="col-5">
-							<div class="news_image">
-								<img src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fb009e92d-65cd-43f3-b2a5-f5e73d26f10e%2FCapture.JPG?rect=135%2C0%2C866%2C577&auto=format%2Ccompress&fmt=webp&format=webp&w=320&dpr=1.0" class="img-fluid">
-							</div>
-						</div>
-					</div>
-				</a>
-		</div><div class="news_box menu" id="heading">
-				<a href="#">
-					<div class="row">
-						<div class="col-7">
-							<div class="news_title">
-								 <b>ঢাকার কোন এলাকায় কখন বিদ্যুৎ যাবে আজ</b><br>
-								 <span>ডিপিডিসি ও ডেসকোর আওতাভুক্ত রাজধানীর যেসব এলাকায় আজ বৃহস্পতিবার লোডশেডিং হবে</span>
-								 <div class="pub-date">
-								 	<span>১৩ জুলাই ২০২২</span>
-								 </div>
-							</div>
-						</div>
-						<div class="col-5">
-							<div class="news_image">
-								<img src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fb009e92d-65cd-43f3-b2a5-f5e73d26f10e%2FCapture.JPG?rect=135%2C0%2C866%2C577&auto=format%2Ccompress&fmt=webp&format=webp&w=320&dpr=1.0" class="img-fluid">
-							</div>
-						</div>
-					</div>
-				</a>
-		</div><div class="news_box menu" id="heading">
-				<a href="#">
-					<div class="row">
-						<div class="col-7">
-							<div class="news_title">
-								 <b>ঢাকার কোন এলাকায় কখন বিদ্যুৎ যাবে আজ</b><br>
-								 <span>ডিপিডিসি ও ডেসকোর আওতাভুক্ত রাজধানীর যেসব এলাকায় আজ বৃহস্পতিবার লোডশেডিং হবে</span>
-								 <div class="pub-date">
-								 	<span>১৩ জুলাই ২০২২</span>
-								 </div>
-							</div>
-						</div>
-						<div class="col-5">
-							<div class="news_image">
-								<img src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fb009e92d-65cd-43f3-b2a5-f5e73d26f10e%2FCapture.JPG?rect=135%2C0%2C866%2C577&auto=format%2Ccompress&fmt=webp&format=webp&w=320&dpr=1.0" class="img-fluid">
-							</div>
-						</div>
-					</div>
-				</a>
-		</div><div class="news_box menu" id="heading">
-				<a href="#">
-					<div class="row">
-						<div class="col-7">
-							<div class="news_title">
-								 <b>ঢাকার কোন এলাকায় কখন বিদ্যুৎ যাবে আজ</b><br>
-								 <span>ডিপিডিসি ও ডেসকোর আওতাভুক্ত রাজধানীর যেসব এলাকায় আজ বৃহস্পতিবার লোডশেডিং হবে</span>
-								 <div class="pub-date">
-								 	<span>১৩ জুলাই ২০২২</span>
-								 </div>
-							</div>
-						</div>
-						<div class="col-5">
-							<div class="news_image">
-								<img src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fb009e92d-65cd-43f3-b2a5-f5e73d26f10e%2FCapture.JPG?rect=135%2C0%2C866%2C577&auto=format%2Ccompress&fmt=webp&format=webp&w=320&dpr=1.0" class="img-fluid">
-							</div>
-						</div>
-					</div>
-				</a>
-		</div><div class="news_box menu" id="heading">
-				<a href="#">
-					<div class="row">
-						<div class="col-7">
-							<div class="news_title">
-								 <b>ঢাকার কোন এলাকায় কখন বিদ্যুৎ যাবে আজ</b><br>
-								 <span>ডিপিডিসি ও ডেসকোর আওতাভুক্ত রাজধানীর যেসব এলাকায় আজ বৃহস্পতিবার লোডশেডিং হবে</span>
-								 <div class="pub-date">
-								 	<span>১৩ জুলাই ২০২২</span>
-								 </div>
-							</div>
-						</div>
-						<div class="col-5">
-							<div class="news_image">
-								<img src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fb009e92d-65cd-43f3-b2a5-f5e73d26f10e%2FCapture.JPG?rect=135%2C0%2C866%2C577&auto=format%2Ccompress&fmt=webp&format=webp&w=320&dpr=1.0" class="img-fluid">
-							</div>
-						</div>
-					</div>
-				</a>
-		</div><div class="news_box menu" id="heading">
-				<a href="#">
-					<div class="row">
-						<div class="col-7">
-							<div class="news_title">
-								 <b>ঢাকার কোন এলাকায় কখন বিদ্যুৎ যাবে আজ</b><br>
-								 <span>ডিপিডিসি ও ডেসকোর আওতাভুক্ত রাজধানীর যেসব এলাকায় আজ বৃহস্পতিবার লোডশেডিং হবে</span>
-								 <div class="pub-date">
-								 	<span>১৩ জুলাই ২০২২</span>
-								 </div>
-							</div>
-						</div>
-						<div class="col-5">
-							<div class="news_image">
-								<img src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fb009e92d-65cd-43f3-b2a5-f5e73d26f10e%2FCapture.JPG?rect=135%2C0%2C866%2C577&auto=format%2Ccompress&fmt=webp&format=webp&w=320&dpr=1.0" class="img-fluid">
-							</div>
-						</div>
-					</div>
-				</a>
+					</a>
+				</div>
+				@endforeach
+				@endif
 		</div>
 	</div>
-</div>
 </div>
 @endif
 @endsection

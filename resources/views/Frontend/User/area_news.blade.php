@@ -19,16 +19,27 @@ use App\Models\news_upazila_info;
 use App\Models\news_image;
 @endphp
 <div class="container">
-    <b>{{$division}}</b>
+    <b>{{$name}}</b>
+    @if($name == 'বিভাগ')
 	<div class="menu_title">
 		<b>{{$division_name->division_name}}</b>
 	</div>
+    @elseif($name == 'জেলা')
+	<div class="menu_title">
+		<b>{{$district_name->district_name}}</b>
+	</div>
+    @else
+	<div class="menu_title">
+		<b>{{$upazila_name->upazila_name}}</b>
+	</div>
+    
+    @endif
 	<div class="menu_news">
 		<div class="menu_box_latest">
-			@if($division_info)
-			@foreach($division_info as $showdivision)
+			@if($news_info)
+			@foreach($news_info as $shownews_info)
 			@php 
-			$shownews = news_information::where('id',$showdivision->news_id)->first();
+			$shownews = news_information::where('id',$shownews_info->news_id)->first();
 			@endphp
 			<div class="news_box menu" id="heading">
 				<a href="{{url('news_detail')}}/{{$shownews->id}}">
@@ -66,7 +77,7 @@ use App\Models\news_image;
 			@endif
 	</div>
 	<div class="paginator">
-		{{-- {{ $division_info->links() }} --}}
+		{{ $news_info->links() }}
 	</div>
 </div>
 </div>

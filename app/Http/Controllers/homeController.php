@@ -72,7 +72,8 @@ class homeController extends Controller
     public function sub_menu_news($id)
     {
         $sub_menu_info = news_sub_menu::find($id);
-        return view('Frontend.User.sub_menu_news',compact('sub_menu_info'));
+        $sub_menu = news_sub_menu_info::where('news_submenu_id',$id)->simplePaginate(20);
+        return view('Frontend.User.sub_menu_news',compact('sub_menu_info','sub_menu'));
     }
     public function categorey_news($id)
     {
@@ -113,16 +114,30 @@ class homeController extends Controller
         }
         elseif($request->district == 0 && $request->upazila == 0)
         {
-           $division = "বিভাগ"; 
+           $name = "বিভাগ"; 
            $division_name = division_information::where('id',$request->division)->first();
-           $division_info = news_division_info::where('news_division_id',$request->division)->simplePaginate(20);
+           $news_info = news_division_info::where('news_division_id',$request->division)->simplePaginate(20);
 
         //    dd($division_info);
-            return view('Frontend.User.area_news',compact('division','division_name','division_info'));
+            return view('Frontend.User.area_news',compact('name','division_name','division_info'));
+        }
+        elseif($request->upazila == 0)
+        {
+            $name = "জেলা"; 
+            $district_name = district_information::where('id',$request->district)->first();
+            $news_info = news_district_info::where('news_district_id',$request->district)->simplePaginate(20);
+    
+         //    dd($division_info);
+             return view('Frontend.User.area_news',compact('name','district_name','news_info'));
         }
         else
         {
-            return 1;
+                $name = "উপজেলা"; 
+                $upazila_name = upazila_information::where('id',$request->upazila)->first();
+                $news_info = news_upazila_info::where('news_upazila_id',$request->upazila)->simplePaginate(20);
+        
+             //    dd($division_info);
+                 return view('Frontend.User.area_news',compact('name','upazila_name','news_info'));
         }
     }
 }

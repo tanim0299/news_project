@@ -140,7 +140,7 @@ use App\Models\news_image;
 					</div>
 					<div class="input-signle-box">
 						{{-- <input type="submit" class="btn btn-info btn-block" value="খুঁজুন"> --}}
-						<button type="submit" class="btn btn-info btn-block">
+						<button type="submit" class="btn btn-info btn-block" formtarget="_blank">
 							<i class="fa fa-search"></i> খুঁজুন
 						</button>
 					</div>
