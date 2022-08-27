@@ -30,6 +30,7 @@ Route::get('/news_detail/{id}',[homeController::class,'news_single']);
 Route::get('/menu_news/{id}',[homeController::class,'menu_news']);
 Route::get('/sub_menu_news/{id}',[homeController::class,'sub_menu_news']);
 Route::get('/categorey_news/{id}',[homeController::class,'categorey_news']);
+Route::get('/view_photo/{id}',[homeController::class,'view_photo']);
 
 
 

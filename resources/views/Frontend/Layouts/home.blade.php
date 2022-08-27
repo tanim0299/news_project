@@ -17,6 +17,8 @@ use App\Models\news_division_info;
 use App\Models\news_district_info;
 use App\Models\news_upazila_info;
 use App\Models\news_image;
+use App\Models\photo_gallery;
+use App\Models\photo_gallery_info;
 @endphp
 <div class="container-fluid">
 	<div class="body-wrapper">
@@ -243,46 +245,30 @@ use App\Models\news_image;
 				<div class="row">
 					<div class="col-lg-6 col-md-12 col-12">
 						<div class="photo_big">
-							<a href="#">
-								<img id="photo" src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fcf9fceec-3b69-4d37-a53f-39c54d5302c0%2F8__sylhet_photo_7_200787syl_9.jpg?rect=1674%2C0%2C4216%2C4216&auto=format%2Ccompress&fmt=webp&format=webp&w=640&dpr=1.0" class="img-fluid">
-								<b id="photo_title" style="transition: .3s;">ফটো টাইটেল</b>
+							@php
+							$first_image = photo_gallery_info::where('photo_gallery_id',$first_photo->id)->first();
+							@endphp
+							<a href="{{url('view_photo')}}/{{$first_photo->id}}">
+								<img id="photo" src="{{asset('public/photoGallery')}}/{{$first_image->image}}" class="img-fluid">
+								<b id="photo_title" style="transition: .3s;">{{$first_photo->title}}</b>
 							</a>
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6 col-12">
 						<div class="row">
+							@foreach($others_photo as $show_photo)
+							@php
+							$first_image = photo_gallery_info::where('photo_gallery_id',$show_photo->id)->first();
+							@endphp
 							<div class="col-6">
 								<div class="photo_big">
-									<a href="#">
-										<img id="photo" src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fcf9fceec-3b69-4d37-a53f-39c54d5302c0%2F8__sylhet_photo_7_200787syl_9.jpg?rect=1674%2C0%2C4216%2C4216&auto=format%2Ccompress&fmt=webp&format=webp&w=640&dpr=1.0" class="img-fluid">
-										<b id="photo_title" style="transition: .3s;">ফটো টাইটেল</b>
+									<a href="{{url('view_photo')}}/{{$show_photo->id}}">
+										<img id="photo" src="{{asset('public/photoGallery')}}/{{$first_image->image}}" class="img-fluid">
+										<b id="photo_title" style="transition: .3s;">{{$show_photo->title}}</b>
 									</a>
 								</div>
 							</div>
-							<div class="col-6">
-								<div class="photo_big">
-									<a href="#">
-										<img id="photo" src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fcf9fceec-3b69-4d37-a53f-39c54d5302c0%2F8__sylhet_photo_7_200787syl_9.jpg?rect=1674%2C0%2C4216%2C4216&auto=format%2Ccompress&fmt=webp&format=webp&w=640&dpr=1.0" class="img-fluid">
-										<b id="photo_title" style="transition: .3s;">ফটো টাইটেল</b>
-									</a>
-								</div>
-							</div>
-							<div class="col-6">
-								<div class="photo_big">
-									<a href="#">
-										<img id="photo" src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fcf9fceec-3b69-4d37-a53f-39c54d5302c0%2F8__sylhet_photo_7_200787syl_9.jpg?rect=1674%2C0%2C4216%2C4216&auto=format%2Ccompress&fmt=webp&format=webp&w=640&dpr=1.0" class="img-fluid">
-										<b id="photo_title" style="transition: .3s;">ফটো টাইটেল</b>
-									</a>
-								</div>
-							</div>
-							<div class="col-6">
-								<div class="photo_big">
-									<a href="#">
-										<img id="photo" src="https://images.prothomalo.com/prothomalo-bangla%2F2022-07%2Fcf9fceec-3b69-4d37-a53f-39c54d5302c0%2F8__sylhet_photo_7_200787syl_9.jpg?rect=1674%2C0%2C4216%2C4216&auto=format%2Ccompress&fmt=webp&format=webp&w=640&dpr=1.0" class="img-fluid">
-										<b id="photo_title" style="transition: .3s;">ফটো টাইটেল</b>
-									</a>
-								</div>
-							</div>
+							@endforeach
 						</div>
 					</div>
 				</div>

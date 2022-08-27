@@ -18,6 +18,8 @@ use App\Models\news_division_info;
 use App\Models\news_district_info;
 use App\Models\news_upazila_info;
 use App\Models\news_image;
+use App\Models\photo_gallery;
+use App\Models\photo_gallery_info;
 
 class homeController extends Controller
 {
@@ -34,15 +36,13 @@ class homeController extends Controller
 
         $news_image = news_image::where('news_id',31)->first();
 
-        // return $news_image;
+        
 
         $divisions = division_information::where('status','1')->get();
 
-        // $newsinfo = news_information::where('status','1')->get();
-
-        // return $top_head_news;
-        
-        return view('Frontend.Layouts.home',compact('news_cat_first','news_cat_second','news_cat_third','news_cat_fourth','top_head_news','news_image','others_top_news','divisions'));
+        $first_photo = photo_gallery::orderBy('id','DESC')->first();
+        $others_photo = photo_gallery::orderBy('id','DESC')->skip(1)->take(4)->get();
+        return view('Frontend.Layouts.home',compact('news_cat_first','news_cat_second','news_cat_third','news_cat_fourth','top_head_news','news_image','others_top_news','divisions','first_photo','others_photo'));
     }
     public function latest()
     {
@@ -59,12 +59,9 @@ class homeController extends Controller
                          ->select('news_sub_menu.*','news_menu.link_name')
                          ->simplePaginate(0);
 
-        // return $news_sub_menu;
-
-        $menu = news_menu_info::where('news_menu_id',$id)->simplePaginate(20);
-        // return $menu;
         
 
+        $menu = news_menu_info::where('news_menu_id',$id)->simplePaginate(20);
 
 
         return view('Frontend.User.menu_news',compact('menu_info','news_sub_menu','menu'));
@@ -139,5 +136,10 @@ class homeController extends Controller
              //    dd($division_info);
                  return view('Frontend.User.area_news',compact('name','upazila_name','news_info'));
         }
+    }
+    public function view_photo($id)
+    {
+        $photo_info = photo_gallery::find($id);
+        return view('Frontend.User.view_photo',compact('photo_info'));
     }
 }
