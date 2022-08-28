@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\website_settings;
+use App\Models\about_us;
+use App\Models\privacy_policy;
 
 class settingsController extends Controller
 {
@@ -46,5 +48,43 @@ class settingsController extends Controller
         {
             return redirect()->back()->with('error','Data Insert Unsuccesfull');
         }
+    }
+    public function addAboutUs()
+    {
+        $data = about_us::first();
+        return view('Backend.User.Settings.add_about_us',compact('data'));
+    }
+    public function aboutUsStore(Request $request)
+    {
+        $update = about_us::where('id',1)->update($request->except('_token','submit'));
+
+        if($update)
+        {
+            return redirect()->back()->with('success','Data Insert Successfully');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Data Insert Unsuccessfull');
+        }
+    }
+    
+    public function addPrivacyPolicy()
+    {
+        $data = privacy_policy::first();
+        return view('Backend.User.Settings.add_privacy_policy',compact('data'));
+    }
+    public function privacyPolicyStore(Request $request)
+    {
+        $update = privacy_policy::where('id',1)->update($request->except('_token','submit'));
+        if($update)
+        {
+            return redirect()->back()->with('success','Data Insert Successfully');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Data Insert Unsuccessfull');
+        }
+
+        
     }
 }

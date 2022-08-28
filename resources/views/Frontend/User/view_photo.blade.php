@@ -86,6 +86,7 @@ use App\Models\photo_gallery_info;
                 </div>
             </div>
         </div>
+    </div>
         <div class="row">
             @foreach($other_photo as $show_photo)
             @php
@@ -101,7 +102,7 @@ use App\Models\photo_gallery_info;
             </div>
             @endforeach
         </div>
-    </div>
+    
 </div>
 
 @endsection

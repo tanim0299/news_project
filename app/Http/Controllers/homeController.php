@@ -21,6 +21,8 @@ use App\Models\news_image;
 use App\Models\photo_gallery;
 use App\Models\photo_gallery_info;
 use App\Models\vedio_info;
+use App\Models\about_us;
+use App\Models\privacy_policy;
 
 class homeController extends Controller
 {
@@ -145,4 +147,16 @@ class homeController extends Controller
         $other_photo = photo_gallery::where('id','!=',$id)->get();
         return view('Frontend.User.view_photo',compact('photo_info','other_photo'));
     }
+    public function about_us()
+    {
+        $data = about_us::first();
+        return view('Frontend.User.about_us',compact('data'));
+    }
+    
+    public function privacy_policy()
+    {
+        $data = about_us::first();
+        return view('Frontend.User.privacy_policy',compact('data'));
+    }
+    
 }

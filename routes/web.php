@@ -31,6 +31,8 @@ Route::get('/menu_news/{id}',[homeController::class,'menu_news']);
 Route::get('/sub_menu_news/{id}',[homeController::class,'sub_menu_news']);
 Route::get('/categorey_news/{id}',[homeController::class,'categorey_news']);
 Route::get('/view_photo/{id}',[homeController::class,'view_photo']);
+Route::get('/about_us',[homeController::class,'about_us']);
+Route::get('/privacy_policy',[homeController::class,'privacy_policy']);
 
 
 
@@ -161,5 +163,9 @@ Route::post('/vedioUpdate/{id}',[App\Http\Controllers\vedioController::class, 'u
 // settings
 Route::get('/settings',[App\Http\Controllers\settingsController::class, 'index']);
 Route::post('/settingsStore',[App\Http\Controllers\settingsController::class, 'store']);
+Route::get('/addAboutUs',[App\Http\Controllers\settingsController::class, 'addAboutUs']);
+Route::post('/aboutUsStore',[App\Http\Controllers\settingsController::class, 'aboutUsStore']);
+Route::get('/addPrivacyPolicy',[App\Http\Controllers\settingsController::class, 'addPrivacyPolicy']);
+Route::post('/privacyPolicyStore',[App\Http\Controllers\settingsController::class, 'privacyPolicyStore']);
 
 

@@ -57,9 +57,9 @@ $settings = website_settings::find(1)->first();
 			<div class="page_links">
 				<div class="links-page">
 					<ul>
-						<li><a href="#">আমাদের সম্পর্কে</a></li>
-						<li><a href="#">প্রাইভেসি পলিসি</a></li>
-						<li><a href="#">আমাদের টিম</a></li>
+						<li><a href="{{url('/about_us')}}">আমাদের সম্পর্কে</a></li>
+						<li><a href="{{url('/privacy_policy')}}">প্রাইভেসি পলিসি</a></li>
+						{{-- <li><a href="#">আমাদের টিম</a></li> --}}
 					</ul>
 				</div>
 			</div>
