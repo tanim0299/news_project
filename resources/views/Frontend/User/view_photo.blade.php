@@ -78,6 +78,30 @@ use App\Models\photo_gallery_info;
         </div>
     </div>
     @endforeach
+    <div class="cat-heading" style="margin-top: 20px;">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-12">
+                <div class="cat_name">
+                    <b>আরও দেখুন</b>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach($other_photo as $show_photo)
+            @php
+            $first_image = photo_gallery_info::where('photo_gallery_id',$show_photo->id)->first();
+            @endphp
+            <div class="col-3">
+                <div class="photo_big">
+                    <a href="{{url('view_photo')}}/{{$show_photo->id}}">
+                        <img id="other_images" src="{{asset('public/photoGallery')}}/{{$first_image->image}}" class="img-fluid">
+                        <b style="font-size: 12px;" id="photo_title" style="transition: .3s;">{{$show_photo->title}}</b>
+                    </a>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
 </div>
 
 @endsection

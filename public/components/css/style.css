@@ -253,19 +253,22 @@ transition: .3s;
 /*max-width: 80%;*/
 transform: scale(1.1);
 }
-
-
-
-.photo_big b {
-position: absolute;
-left: 0px;
-bottom: 0;
-width: 100%;
-background: #00000063;
-padding: 21px 18px;
-font-size: 21px;
-overflow: hidden;
+img#first_image {
+    height: 526px;
+    width: 721px;
 }
+
+img#other_images {
+    height: 262px;
+    width: 315px;
+}
+
+b#photo_title {
+    font-size: 16px;
+}
+
+
+.photo_big b {position: absolute;left: 0px;bottom: 0;width: 100%;background: linear-gradient(0deg, #000000cc, transparent);padding: 21px 18px;font-size: 21px;overflow: hidden;}
 
 .photo_big b:hover{
 color: yellow !important;
@@ -280,7 +283,7 @@ overflow: hidden;
 /* width: 519px; */
 }
 .cat-body {
-background: black;
+background: #d8d8d8;
 margin-top: 7px;
 padding: 20px;
 }

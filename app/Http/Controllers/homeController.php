@@ -20,6 +20,7 @@ use App\Models\news_upazila_info;
 use App\Models\news_image;
 use App\Models\photo_gallery;
 use App\Models\photo_gallery_info;
+use App\Models\vedio_info;
 
 class homeController extends Controller
 {
@@ -30,9 +31,9 @@ class homeController extends Controller
         $news_cat_third = news_categorey::where('status','1')->skip(4)->take(12)->get();
         $news_cat_fourth = news_categorey::where('status','1')->skip(12)->take(30)->get();
 
-        $top_head_news = news_information::where('news_type','top_news')->orderBy('id','DESC')->take(1)->get();
+        $top_head_news = news_information::where('news_type','top_news')->where('status','1')->orderBy('id','DESC')->take(1)->get();
 
-        $others_top_news = news_information::where('news_type','top_news')->orderBy('id','DESC')->skip(1)->take(30)->get();
+        $others_top_news = news_information::where('news_type','top_news')->where('status','1')->orderBy('id','DESC')->skip(1)->take(30)->get();
 
         $news_image = news_image::where('news_id',31)->first();
 
@@ -42,11 +43,12 @@ class homeController extends Controller
 
         $first_photo = photo_gallery::orderBy('id','DESC')->first();
         $others_photo = photo_gallery::orderBy('id','DESC')->skip(1)->take(4)->get();
-        return view('Frontend.Layouts.home',compact('news_cat_first','news_cat_second','news_cat_third','news_cat_fourth','top_head_news','news_image','others_top_news','divisions','first_photo','others_photo'));
+        $vedio_info = vedio_info::where('status','1')->orderBy('id','DESC')->take(4)->get();
+        return view('Frontend.Layouts.home',compact('news_cat_first','news_cat_second','news_cat_third','news_cat_fourth','top_head_news','news_image','others_top_news','divisions','first_photo','others_photo','vedio_info'));
     }
     public function latest()
     {
-        $news = news_information::orderBy('id','DESC')->simplePaginate(20);
+        $news = news_information::orderBy('id','DESC')->where('status','1')->simplePaginate(20);
         
         return view('Frontend.User.latest',compact('news'));
     }
@@ -61,7 +63,7 @@ class homeController extends Controller
 
         
 
-        $menu = news_menu_info::where('news_menu_id',$id)->simplePaginate(20);
+        $menu = news_menu_info::where('news_menu_id',$id)->where('status','1')->simplePaginate(20);
 
 
         return view('Frontend.User.menu_news',compact('menu_info','news_sub_menu','menu'));
@@ -76,18 +78,18 @@ class homeController extends Controller
     {
         $categorey_info = news_categorey::find($id);
 
-        $categorey = news_categorey_info::where('news_categorey_id',$id)->simplePaginate(20);
+        $categorey = news_categorey_info::where('news_categorey_id',$id)->where('status','1')->simplePaginate(20);
         return view('Frontend.User.categorey_news',compact('categorey_info','categorey'));
     }
     public function getHomeDistrict(Request $request)
     {
-        $district = district_information::where('division_id',$request->division_id)->get();
+        $district = district_information::where('division_id',$request->division_id)->where('status','1')->get();
 
         return view('Frontend.Layouts.load_district',compact('district'));
     }
     public function getHomeUpzaila(Request $request)
     {
-        $upazila = upazila_information::where('district_id',$request->district_id)->get();
+        $upazila = upazila_information::where('district_id',$request->district_id)->where('status','1')->get();
 
         return view('Frontend.Layouts.load_upazila',compact('upazila'));
     }
@@ -116,7 +118,7 @@ class homeController extends Controller
            $news_info = news_division_info::where('news_division_id',$request->division)->simplePaginate(20);
 
         //    dd($division_info);
-            return view('Frontend.User.area_news',compact('name','division_name','division_info'));
+            return view('Frontend.User.area_news',compact('name','division_name','news_info'));
         }
         elseif($request->upazila == 0)
         {
@@ -140,6 +142,7 @@ class homeController extends Controller
     public function view_photo($id)
     {
         $photo_info = photo_gallery::find($id);
-        return view('Frontend.User.view_photo',compact('photo_info'));
+        $other_photo = photo_gallery::where('id','!=',$id)->get();
+        return view('Frontend.User.view_photo',compact('photo_info','other_photo'));
     }
 }

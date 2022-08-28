@@ -249,7 +249,7 @@ use App\Models\photo_gallery_info;
 							$first_image = photo_gallery_info::where('photo_gallery_id',$first_photo->id)->first();
 							@endphp
 							<a href="{{url('view_photo')}}/{{$first_photo->id}}">
-								<img id="photo" src="{{asset('public/photoGallery')}}/{{$first_image->image}}" class="img-fluid">
+								<img id="first_image" src="{{asset('public/photoGallery')}}/{{$first_image->image}}" class="img-fluid">
 								<b id="photo_title" style="transition: .3s;">{{$first_photo->title}}</b>
 							</a>
 						</div>
@@ -263,7 +263,7 @@ use App\Models\photo_gallery_info;
 							<div class="col-6">
 								<div class="photo_big">
 									<a href="{{url('view_photo')}}/{{$show_photo->id}}">
-										<img id="photo" src="{{asset('public/photoGallery')}}/{{$first_image->image}}" class="img-fluid">
+										<img id="other_images" src="{{asset('public/photoGallery')}}/{{$first_image->image}}" class="img-fluid">
 										<b id="photo_title" style="transition: .3s;">{{$show_photo->title}}</b>
 									</a>
 								</div>
@@ -374,10 +374,19 @@ use App\Models\photo_gallery_info;
 			</div>
 			<div class="cat-body">
 				<div class="row">
-					<div class="col-lg-4 col-md-6 col-12">
+					@foreach($vedio_info as $showvedio)
+					<div class="col-lg-6 col-md-6 col-12">
 						<div class="photo_big">
 							<a href="#">
-								<iframe width="560" height="315" src="https://www.youtube.com/embed/Z98VSFpTJ2I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+								<iframe width="560" height="315" src="{!! $showvedio->youtube_link !!}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+							</a>
+						</div>
+					</div>
+					@endforeach
+					{{-- <div class="col-lg-4 col-md-6 col-12">
+						<div class="photo_big">
+							<a href="#">
+								<iframe width="750" height="315" src="https://www.youtube.com/embed/Z98VSFpTJ2I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 							</a>
 						</div>
 					</div>
@@ -387,14 +396,7 @@ use App\Models\photo_gallery_info;
 								<iframe width="560" height="315" src="https://www.youtube.com/embed/Z98VSFpTJ2I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 							</a>
 						</div>
-					</div>
-					<div class="col-lg-4 col-md-6 col-12">
-						<div class="photo_big">
-							<a href="#">
-								<iframe width="560" height="315" src="https://www.youtube.com/embed/Z98VSFpTJ2I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-							</a>
-						</div>
-					</div>
+					</div> --}}
 				</div>
 			</div>
 		</div>
