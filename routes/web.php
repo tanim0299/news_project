@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\mainMenuController;
+use App\Http\Controllers\guestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,10 @@ Route::get('/categorey_news/{id}',[homeController::class,'categorey_news']);
 Route::get('/view_photo/{id}',[homeController::class,'view_photo']);
 Route::get('/about_us',[homeController::class,'about_us']);
 Route::get('/privacy_policy',[homeController::class,'privacy_policy']);
+
+Route::get('/guestLogin',[guestController::class,'index']);
+Route::get('/guestRegister',[guestController::class,'register']);
+Route::post('/guestStore',[guestController::class,'guestStore']);
 
 
 

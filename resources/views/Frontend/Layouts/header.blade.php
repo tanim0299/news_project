@@ -58,7 +58,7 @@ $news_menu = news_menu::where('status','1')->get();
 
 					        <div class="login-btn">
 						
-								<a href="#" class="btn btn-outline-info">লগইন</a>
+								<a href="{{url('/guestLogin')}}" class="btn btn-outline-info">লগইন</a>
 							</div>
 							<div class="links" style="margin-top:10px;">
 								<a href="{{$settings->facebook}}"><i class="fab fa-facebook-f"></i></a>	
@@ -103,7 +103,7 @@ $news_menu = news_menu::where('status','1')->get();
 				<div class="right-area" style="text-align: right;">
 					<div class="login-btn">
 						
-						<a href="#" class="btn btn-outline-info">লগইন</a>
+						<a href="{{url('/guestLogin')}}" class="btn btn-outline-info">লগইন</a>
 					</div>
 					<div class="links" style="margin-top:10px;">
 						<a href="{{$settings->facebook}}"><i class="fab fa-facebook-f"></i></a>	
