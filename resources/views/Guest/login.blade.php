@@ -44,19 +44,43 @@
                     @php 
                     $settings = DB::table('website_settings')->first();
                     @endphp
-                    <img src="{{asset('public/components/Images')}}/{{$settings->image}}" alt="">
+                    <a href="{{url('/')}}"><img src="{{asset('public/components/Images')}}/{{$settings->image}}" alt=""></a>
                 </div>
                 <div class="title">
                     <b>Login To Continue</b>
                 </div>
             </div>
             <div class="box-body">
-                <input type="email" class="form-control" placeholder="Email" name="email">
-                <input type="password" class="form-control" placeholder="Password" name="password">
-                <input type="submit" class="btn btn-info w-100">
-                <div class="check_login" style="margin-top: 20px">
-                    <span>Don't Have Any Account?</span><a href="{{url('guestRegister')}}">Click Here </a> To Create A Account.
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                
+                @if(Session::get('success'))
+                <div class="alert alert-success alert-block">
+                    {{-- <button type="button" class="close" data-dismiss="alert">×</button>  --}}
+                        <strong>{{Session::get('success')}}</strong>
                 </div>
+                @elseif(Session::get('error'))
+                <div class="alert alert-danger alert-block">
+                    {{-- <button type="button" class="close" data-dismiss="alert">×</button>  --}}
+                        <strong>{{Session::get('error')}}</strong>
+                </div>
+                @endif
+                <form action="{{url('guestLoginAttempt')}}" method="POST">
+                    @csrf
+                    <input type="email" class="form-control" placeholder="Email" name="email">
+                    <input type="password" class="form-control" placeholder="Password" name="password">
+                    <input type="submit" class="btn btn-info w-100">
+                    <div class="check_login" style="margin-top: 20px">
+                        <span>Don't Have Any Account?</span><a href="{{url('guestRegister')}}">Click Here </a> To Create A Account.
+                    </div>
+                </form>
             </div>
         </div>
     </div>

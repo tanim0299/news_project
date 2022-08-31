@@ -57,8 +57,16 @@ $news_menu = news_menu::where('status','1')->get();
 					        </div>
 
 					        <div class="login-btn">
-						
+								@if(Auth::guard('guests')->check())
+								<a href="{{url('/guestDashboard')}}">
+								<div class="profile_login">
+									<img src="{{asset('public/guestImage')}}/{{Auth::guard('guests')->user()->image}}" alt="" class="img-fluid">
+									<b>{{Auth::guard('guests')->user()->full_name}}</b>
+								</div>
+								</a>
+								@else
 								<a href="{{url('/guestLogin')}}" class="btn btn-outline-info">লগইন</a>
+								@endif
 							</div>
 							<div class="links" style="margin-top:10px;">
 								<a href="{{$settings->facebook}}"><i class="fab fa-facebook-f"></i></a>	
@@ -102,8 +110,16 @@ $news_menu = news_menu::where('status','1')->get();
 			<div class="col-lg-3" id="login-icon">
 				<div class="right-area" style="text-align: right;">
 					<div class="login-btn">
-						
-						<a href="{{url('/guestLogin')}}" class="btn btn-outline-info">লগইন</a>
+						@if(Auth::guard('guests')->check())
+								<a href="{{url('/guestDashboard')}}">
+								<div class="profile_login">
+									<img src="{{asset('public/guestImage')}}/{{Auth::guard('guests')->user()->image}}" alt="" class="img-fluid">
+									<b>{{Auth::guard('guests')->user()->full_name}}</b>
+								</div>
+								</a>
+								@else
+								<a href="{{url('/guestLogin')}}" class="btn btn-outline-info">লগইন</a>
+								@endif
 					</div>
 					<div class="links" style="margin-top:10px;">
 						<a href="{{$settings->facebook}}"><i class="fab fa-facebook-f"></i></a>	

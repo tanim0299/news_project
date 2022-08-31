@@ -38,6 +38,16 @@ Route::get('/privacy_policy',[homeController::class,'privacy_policy']);
 Route::get('/guestLogin',[guestController::class,'index']);
 Route::get('/guestRegister',[guestController::class,'register']);
 Route::post('/guestStore',[guestController::class,'guestStore']);
+Route::post('/guestLoginAttempt',[guestController::class,'guestLoginAttempt']);
+Route::post('/guestEdit/{id}',[guestController::class,'guestEdit']);
+
+Route::get('guestLogout',[guestController::class,'logout']);
+
+Route::get('/edit_profile',[guestController::class,'edit_profile']);
+Route::get('/pass_reset',[guestController::class,'pass_reset']);
+Route::post('/passwordReset/{id}',[guestController::class,'passwordReset']);
+
+Route::get('guestDashboard',[guestController::class,'guestDashboard'])->middleware('guests');
 
 
 

@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class guest_country extends Model
 {
     use HasFactory;
+    protected $guarded = [];
 }

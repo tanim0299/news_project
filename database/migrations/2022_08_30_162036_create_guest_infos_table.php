@@ -18,12 +18,12 @@ class CreateGuestInfosTable extends Migration
             $table->string('full_name',100);
             $table->string('email',100);
             $table->string('password',200);
-            $table->bigInteger('country_id')->unsigned()->nullable();
-            $table->foreign('country_id')->references('id')->on('country_information');
+            $table->string('country_id')->nullable();
             $table->string('phone',20)->nullable();
             $table->string('gender',20)->nullable();
             $table->date('date_of_birth')->nullable();
             $table->string('image',30)->nullable();
+            $table->string('recover_pass',200)->nullable();
             $table->timestamps();
         });
     }

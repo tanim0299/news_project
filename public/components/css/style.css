@@ -329,6 +329,18 @@ margin-top: 20px;
 margin-top: 26px;
 }
 
+.profile_login img {
+    height: 60px;
+    width: 60px;
+    border-radius: 100%;
+}
+
+.profile_login b {
+    font-family: 'Font Awesome 5 Free';
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
 .footer-wrapper {
 border-top: 1px solid lightgray;
 margin-top: 34px;

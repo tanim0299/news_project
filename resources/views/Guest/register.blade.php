@@ -44,7 +44,7 @@
                     @php 
                     $settings = DB::table('website_settings')->first();
                     @endphp
-                    <img src="{{asset('public/components/Images')}}/{{$settings->image}}" alt="">
+                    <a href="{{url('/')}}"><img src="{{asset('public/components/Images')}}/{{$settings->image}}" alt=""></a>
                 </div>
                 <div class="title">
                     <b>Registration</b>

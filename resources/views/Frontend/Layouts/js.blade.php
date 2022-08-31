@@ -203,3 +203,54 @@
 }
 </script>
 
+<script type="text/javascript">
+    
+    //     instance = new dtsel.DTS('input[name="dateTimePicker"]',  {
+    //   showTime: true
+    // });
+    
+    instance = new dtsel.DTS('input[id="dateTimePicker"]',  {
+      showTime: false,
+      showDate: true
+    });
+    
+    instance = new dtsel.DTS('input[id="dateTimePicker"]',  {
+      dateFormat: "yyyy-mm-dd",
+    })
+    
+    </script>
+    <script type="text/javascript">
+        
+    //     instance = new dtsel.DTS('input[name="dateTimePicker"]',  {
+    //   showTime: true
+    // });
+    
+    instance = new dtsel.DTS('input[id="dateTimePicker1"]',  {
+      showTime: false,
+      showDate: true
+    });
+    
+    instance = new dtsel.DTS('input[id="dateTimePicker1"]',  {
+      dateFormat: "yyyy-mm-dd",
+    })
+    
+    </script>
+    <script type="text/javascript">
+        
+    //     instance = new dtsel.DTS('input[name="dateTimePicker"]',  {
+    //   showTime: true
+    // });
+    
+    instance = new dtsel.DTS('input[id="dateTimePicker2"]',  {
+      showTime: false,
+      showDate: true
+    });
+    
+    instance = new dtsel.DTS('input[id="dateTimePicker2"]',  {
+      dateFormat: "yyyy-mm-dd",
+    })
+    
+    
+    
+    </script>
+
