@@ -113,7 +113,17 @@ $news_menu = news_menu::where('status','1')->get();
 						@if(Auth::guard('guests')->check())
 								<a href="{{url('/guestDashboard')}}">
 								<div class="profile_login">
+									@php 
+									$path = public_path().'/guestImage/'.Auth::guard('guests')->user()->image;
+									$name = Auth::guard('guests')->user()->full_name;
+									@endphp
+									@if(file_exists($path))
 									<img src="{{asset('public/guestImage')}}/{{Auth::guard('guests')->user()->image}}" alt="" class="img-fluid">
+									@else
+									{{-- <div class="text_profile">
+										<b>{{substr($name,0,1)}}</b>
+									 </div> --}}
+									@endif
 									<b>{{Auth::guard('guests')->user()->full_name}}</b>
 								</div>
 								</a>

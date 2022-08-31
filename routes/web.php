@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\mainMenuController;
 use App\Http\Controllers\guestController;
+use App\Http\Controllers\commentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,10 @@ Route::get('guestDashboard',[guestController::class,'guestDashboard'])->middlewa
 Route::post('/getHomeDistrict',[homeController::class,'getHomeDistrict']);
 Route::post('/getHomeUpzaila',[homeController::class,'getHomeUpzaila']);
 Route::post('/filter_news',[homeController::class,'filter_news']);
+
+//comment araea
+Route::post('/postComment',[commentController::class,'store']);
+Route::post('/getComment',[commentController::class,'getComment']);
 
 Auth::routes();
 

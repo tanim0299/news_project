@@ -336,40 +336,37 @@ b.sec-title {
                         <div class="comments">
                             <b>7 Comments</b>
                         </div>
-                        <div class="post_area">
-                            <form method="post" enctype="multipart/form-data">
+                        <div class="post_area"> 
+                            @if(Auth::guard('guests')->check())
+                            
                                 <div class="row">
                                     <div class="col-12" style="padding: 0px;">
                                         <div class="d-flex">
                                             <div class="profile">
-                                                <img src="https://img.freepik.com/premium-vector/avatar-portrait-young-caucasian-boy-man-round-frame-vector-cartoon-flat-illustration_551425-19.jpg?w=2000" class="img-fluid">
+                                                <img src="{{asset('public/guestImage')}}/{{Auth::guard('guests')->user()->image}}" class="img-fluid">
                                             </div>
                                             <div class="user-info">
-                                                <b>Sumsul Karim</b>
+                                                <b>{{Auth::guard('guests')->user()->full_name}}</b>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12" style="padding: 0px;">
-                                    <textarea id="summernote"></textarea>
+                                <form method="POST" enctype="multipart/form-data" id="form">
+                                <div class="col-12" style="padding: 0px;margin-top:20px;">
+                                    <textarea id="summernote" name="comment" class="comment"></textarea>
+                                    <input type="hidden" id="news_id" value="{{$news_id}}">
+                                    <input type="hidden" id="guest_id" value="{{Auth::guard('guests')->user()->id}}">
                                 </div>
                                 <div class="col-12" style="padding: 0px;margin-top:10px;">
-                                    <button type="submit" class="btn btn-secondary btn-block"><i class="fa fa-paper-plane"></i>  POST</button>
+                                    <button id="post" type="submit" class="btn btn-secondary btn-block"><i class="fa fa-paper-plane"></i>  POST</button>
                                 </div>
                             </form>
+                            @else
+                            <div class="badge badge-info">Please Login To Comment</div>
+                            @endif
                         </div>
                         <div class="posted_view">
-                            <div class="post-single">
-                                <div class="d-flex">
-                                    <div class="profile">
-                                        <img src="https://img.freepik.com/premium-vector/avatar-portrait-young-caucasian-boy-man-round-frame-vector-cartoon-flat-illustration_551425-19.jpg?w=2000" class="img-fluid">
-                                    </div>
-                                    <div class="right-side">
-                                        <b>Sumsul Karim</b><br>
-                                        <div class="post-detail">jhkdhfksdjhfkdasfljsdjkf</div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

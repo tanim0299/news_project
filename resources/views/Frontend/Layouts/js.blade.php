@@ -254,3 +254,87 @@
     
     </script>
 
+
+<script>
+    $(document).ready(function(){
+        var news_id = $('#news_id').val();
+        function loadComment()
+        {
+            $.ajax({
+                headers:
+                {
+                    'X-CSRF-TOKEN' : '{{ csrf_token() }}'
+                },
+
+                url : '{{url('getComment')}}',
+
+                type : 'POST',
+
+                data : {news_id},
+
+                success : function(data)
+                {
+                    $('.posted_view').html(data);
+                }
+            });
+        }
+
+        loadComment();
+
+        $('#post').on('click',function(e){
+            e.preventDefault();
+
+            var comment = $('.comment').val();
+            var news_id = $('#news_id').val();
+            var guest_id = $('#guest_id').val();
+
+            // alert(comment);
+
+            if(comment != '')
+            {
+                $.ajax({
+
+                    headers:
+                    {
+                        'X-CSRF-TOKEN' : '{{ csrf_token() }}'
+                    },
+
+                    url : '{{url('postComment')}}',
+
+                    type : 'POST',
+
+                    data : {comment,news_id,guest_id},
+
+                    success : function(data)
+                    {
+                        // alert(data);
+                        if(data == 1)
+                        {
+                            loadComment();
+                            $('#summernote').summernote('reset');
+                            UIkit.notification({
+                                message: '<span uk-icon=\'icon: check\'></span> Comment Added'
+                            });
+                        }
+                        else
+                        {
+                            UIkit.notification({
+                                message: '<span uk-icon=\'icon: cross\'></span> Comment Added Failed'
+                            });
+
+                        }
+                    }
+
+                });
+            }
+            else
+            {
+                alert('Please Write Some Comment');
+            }
+            
+
+        });
+
+    });
+</script>
+
