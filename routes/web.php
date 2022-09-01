@@ -47,6 +47,10 @@ Route::get('guestLogout',[guestController::class,'logout']);
 Route::get('/edit_profile',[guestController::class,'edit_profile']);
 Route::get('/pass_reset',[guestController::class,'pass_reset']);
 Route::post('/passwordReset/{id}',[guestController::class,'passwordReset']);
+Route::get('/addToFav/{news_id}/{guest_id}',[guestController::class,'addToFav']);
+Route::get('/removeFromFav/{news_id}/{guest_id}',[guestController::class,'removeFromFav']);
+Route::get('/my_comments/{id}',[guestController::class,'my_comments']);
+Route::get('/favourite_news/{id}',[guestController::class,'favourite_news']);
 
 Route::get('guestDashboard',[guestController::class,'guestDashboard'])->middleware('guests');
 
@@ -59,6 +63,7 @@ Route::post('/filter_news',[homeController::class,'filter_news']);
 //comment araea
 Route::post('/postComment',[commentController::class,'store']);
 Route::post('/getComment',[commentController::class,'getComment']);
+Route::get('/delete_comment/{id}',[commentController::class,'delete_comment']);
 
 Auth::routes();
 

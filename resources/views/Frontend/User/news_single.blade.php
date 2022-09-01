@@ -89,6 +89,18 @@ use App\Models\news_image;
     border-radius: 22px;
     padding: 5px 3px;
 }
+.print-line li:nth-child(4) {
+    background: #000000;
+    color: white !important;
+    border-radius: 22px;
+    padding: 5px 3px;
+}
+.print-line li.active{
+    background: blue !important;
+    color: white !important;
+    border-radius: 22px;
+    padding: 5px 3px;
+}
 .print-line li:last-child {
     background: #000000;
     color: white !important;
@@ -130,6 +142,10 @@ ul.uk-lightbox-items img {
     border-bottom: 3px solid lightgray;
     padding-bottom: 21px;
     font-size: 16px;
+}
+.right-side b {
+    font-size: 15px;
+    font-family: 'AdorshoLipi';
 }
 .profile img {
     height: 80px;
@@ -187,10 +203,11 @@ button.note-btn.btn.btn-default.btn-sm.btn-fullscreen.note-codeview-keep {
 }
 .post-single {
     margin-top: 20px;
-    border-top: 1px solid lightgray;
+    /* border-top: 1px solid lightgray; */
     padding: 3px 14px;
-    background: #f1f1f1;
-    border-radius: 12px;
+    /* background: #f1f1f1; */
+    /* border-radius: 12px; */
+    border-bottom: 1px solid lightgray;
 }
 li.news-box {
     list-style: none;
@@ -301,6 +318,20 @@ b.sec-title {
                             <li><button onclick="increaseFontSizeBy1px()" href="#">অ+</button></li>
                             <li><button onclick="decreaseFontSizeBy1px()" href="#">অ-</button></li>
                             <li><a href="#" id="print"><i class="fa fa-print"></i></a></li>
+                            @if(Auth::guard('guests')->check())
+                            @php 
+                            $guest_id = Auth::guard('guests')->user()->id;
+                            $check = DB::table('favourite_news')
+                                     ->where('news_id',$news_id)
+                                     ->where('guest_id',$guest_id)
+                                     ->first();
+                            @endphp
+                            @if($check)
+                            <li class="active"><a href="{{url('/removeFromFav')}}/{{$news_id}}/{{Auth::guard('guests')->user()->id}}" id="print"><i class="fa fa-check"></i></a></li>
+                            @else
+                            <li><a href="{{url('/addToFav')}}/{{$news_id}}/{{Auth::guard('guests')->user()->id}}" id="print"><i class="fa fa-bookmark"></i></a></li>
+                            @endif
+                            @endif
                         </div>
                     </div>
                 </div>

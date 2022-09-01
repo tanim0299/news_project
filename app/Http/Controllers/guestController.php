@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\guest_info;
 use App\Models\guest_country;
+use App\Models\favourite_news;
+use App\Models\comment_info;
 use Hash;
 use Auth;
 
@@ -164,5 +166,34 @@ class guestController extends Controller
     public function pass_reset()
     {
         return view('Guest.pass_reset');
+    }
+    public function addToFav($news_id,$guest_id)
+    {
+        $insert = favourite_news::create([
+            'news_id'=>$news_id,
+            'guest_id'=>$guest_id,
+            'status'=>1,
+        ]);
+
+        return redirect()->back();
+    }
+    public function removeFromFav($news_id,$guest_id)
+    {
+        $insert = favourite_news::where('news_id',$news_id)
+                  ->where('guest_id',$guest_id)
+                  ->delete();
+
+        return redirect()->back();
+    }
+    public function my_comments($guest_id)
+    {
+        $comments = comment_info::where('guest_id',$guest_id)->get();
+
+        return view('Guest.my_comments',compact('comments','guest_id'));
+    }
+    public function favourite_news($guest_id)
+    {
+        $favNews = favourite_news::where('guest_id',$guest_id)->get();
+        return view('Guest.favourite_news',compact('favNews'));
     }
 }

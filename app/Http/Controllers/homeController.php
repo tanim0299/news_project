@@ -65,7 +65,7 @@ class homeController extends Controller
 
         
 
-        $menu = news_menu_info::where('news_menu_id',$id)->where('status','1')->simplePaginate(20);
+        $menu = news_menu_info::where('news_menu_id',$id)->simplePaginate(20);
 
 
         return view('Frontend.User.menu_news',compact('menu_info','news_sub_menu','menu'));

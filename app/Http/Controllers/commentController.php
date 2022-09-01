@@ -35,4 +35,9 @@ class commentController extends Controller
 
         return view('Frontend.User.load_comment',compact('comment'));
     }
+    public function delete_comment($id)
+    {
+        comment_info::where('id',$id)->delete();
+        return redirect()->back();
+    }
 }
