@@ -4,6 +4,13 @@
    .delete_comment {
     text-align: right;
 }
+.posted_view {
+    height: 800px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+
 </style>
 <div class="post-single">
     <div class="d-flex">

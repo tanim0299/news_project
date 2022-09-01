@@ -31,7 +31,7 @@ class guestController extends Controller
     {
         $validated = $request->validate([
             'full_name'=>'required|min:5',
-            'email'=>'required',
+            'email'=>'required|unique:guest_infos',
             'password'=>'required|min:3',
         ]);
 
@@ -80,7 +80,7 @@ class guestController extends Controller
     public function logout()
     {
         Auth::guard('guests')->logout();
-        return redirect('/guestLogin');
+        return redirect('/');
     }
 
     public function edit_profile()
@@ -187,13 +187,13 @@ class guestController extends Controller
     }
     public function my_comments($guest_id)
     {
-        $comments = comment_info::where('guest_id',$guest_id)->get();
+        $comments = comment_info::where('guest_id',$guest_id)->simplePaginate(10);
 
         return view('Guest.my_comments',compact('comments','guest_id'));
     }
     public function favourite_news($guest_id)
     {
-        $favNews = favourite_news::where('guest_id',$guest_id)->get();
+        $favNews = favourite_news::where('guest_id',$guest_id)->simplePaginate(10);
         return view('Guest.favourite_news',compact('favNews'));
     }
 }

@@ -51,6 +51,9 @@
             </div>
             @endforeach
             @endif
+            <div class="paginator">
+                {{ $favNews->links() }}
+             </div>
          </div>
       </div>
    </div>

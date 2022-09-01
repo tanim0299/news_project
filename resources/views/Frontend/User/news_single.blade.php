@@ -365,7 +365,7 @@ b.sec-title {
                             <b>মন্তব্য করুন</b>
                         </div>
                         <div class="comments">
-                            <b>7 Comments</b>
+                            <b>{{$total_comments}} Comments</b>
                         </div>
                         <div class="post_area"> 
                             @if(Auth::guard('guests')->check())
@@ -396,7 +396,7 @@ b.sec-title {
                             <div class="badge badge-info">Please Login To Comment</div>
                             @endif
                         </div>
-                        <div class="posted_view">
+                        <div class="posted_view" id="post-view">
                             
                         </div>
                     </div>

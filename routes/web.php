@@ -5,6 +5,7 @@ use App\Http\Controllers\homeController;
 use App\Http\Controllers\mainMenuController;
 use App\Http\Controllers\guestController;
 use App\Http\Controllers\commentController;
+use App\Http\Controllers\adminGuestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -192,5 +193,10 @@ Route::get('/addAboutUs',[App\Http\Controllers\settingsController::class, 'addAb
 Route::post('/aboutUsStore',[App\Http\Controllers\settingsController::class, 'aboutUsStore']);
 Route::get('/addPrivacyPolicy',[App\Http\Controllers\settingsController::class, 'addPrivacyPolicy']);
 Route::post('/privacyPolicyStore',[App\Http\Controllers\settingsController::class, 'privacyPolicyStore']);
+
+
+//guest
+Route::get('/viewGuest',[adminGuestController::class,'viewGuest']);
+Route::get('/delete_guest/{id}',[adminGuestController::class,'delete_guest']);
 
 

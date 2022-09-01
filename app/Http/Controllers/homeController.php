@@ -23,6 +23,7 @@ use App\Models\photo_gallery_info;
 use App\Models\vedio_info;
 use App\Models\about_us;
 use App\Models\privacy_policy;
+use App\Models\comment_info;
 
 class homeController extends Controller
 {
@@ -30,8 +31,8 @@ class homeController extends Controller
     {
         $news_cat_first = news_categorey::where('status','1')->take(2)->get();
         $news_cat_second = news_categorey::where('status','1')->skip(2)->take(2)->get();
-        $news_cat_third = news_categorey::where('status','1')->skip(4)->take(12)->get();
-        $news_cat_fourth = news_categorey::where('status','1')->skip(12)->take(30)->get();
+        $news_cat_third = news_categorey::where('status','1')->skip(5)->take(12)->get();
+        $news_cat_fourth = news_categorey::where('status','1')->skip(15)->take(30)->get();
 
         $top_head_news = news_information::where('news_type','top_news')->where('status','1')->orderBy('id','DESC')->take(1)->get();
 
@@ -80,7 +81,7 @@ class homeController extends Controller
     {
         $categorey_info = news_categorey::find($id);
 
-        $categorey = news_categorey_info::where('news_categorey_id',$id)->where('status','1')->simplePaginate(20);
+        $categorey = news_categorey_info::where('news_categorey_id',$id)->simplePaginate(20);
         return view('Frontend.User.categorey_news',compact('categorey_info','categorey'));
     }
     public function getHomeDistrict(Request $request)
@@ -104,7 +105,9 @@ class homeController extends Controller
                             ->join('news_categorey','news_categorey.id','=','news_categorey_info.news_categorey_id')
                             ->select('news_categorey.cat_name','news_categorey.id')->get();
         $news_id = $id;
-        return view('Frontend.User.news_single',compact('data','images','otherImg','news_categoreys','news_id'));
+        $comments = comment_info::where('news_id',$id)->get();
+        $total_comments = count($comments);
+        return view('Frontend.User.news_single',compact('data','images','otherImg','news_categoreys','news_id','total_comments'));
     }
     public function filter_news(Request $request)
     {

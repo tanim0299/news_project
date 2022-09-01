@@ -52,6 +52,9 @@
             </div>
             @endforeach
             @endif
+            <div class="paginator">
+               {{ $comments->links() }}
+            </div>
          </div>
       </div>
    </div>
