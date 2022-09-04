@@ -365,7 +365,7 @@ b.sec-title {
                             <b>মন্তব্য করুন</b>
                         </div>
                         <div class="comments">
-                            <b>{{$total_comments}} Comments</b>
+                            <b id="totalComment">{{$total_comments}}</b>  Comments
                         </div>
                         <div class="post_area"> 
                             @if(Auth::guard('guests')->check())

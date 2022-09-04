@@ -226,7 +226,8 @@ class newsController extends Controller
 
     public function view()
     {
-        $data = news_information::all();
+        $date = date('Y-m-d');
+        $data = news_information::where('date',$date)->get();
         $sl = 1;
         return view("Backend.User.NewsInfo.view_news",compact('data','sl'));
     }
@@ -520,6 +521,20 @@ class newsController extends Controller
         {
             return redirect()->back()->with('error','Data Delete Unsuccessfully');
         }
+
+    }
+
+    public function filterNews(Request $request)
+    {
+        // dd($request->all());
+        $validated = $request->validate([
+            'from_date'=>'required',
+            'to_date'=>'required',
+        ]);
+
+        $data = news_information::whereBetween('date',[$request->from_date,$request->to_date])->get();
+        $sl = 1;
+        return view("Backend.User.NewsInfo.view_news",compact('data','sl'));
 
     }
 }

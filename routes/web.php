@@ -65,6 +65,7 @@ Route::post('/filter_news',[homeController::class,'filter_news']);
 Route::post('/postComment',[commentController::class,'store']);
 Route::post('/getComment',[commentController::class,'getComment']);
 Route::get('/delete_comment/{id}',[commentController::class,'delete_comment']);
+Route::post('/countComment',[commentController::class,'countComment']);
 
 Auth::routes();
 
@@ -166,6 +167,7 @@ Route::get('/viewNews',[App\Http\Controllers\newsController::class, 'view']);
 Route::get('/editNews/{id}',[App\Http\Controllers\newsController::class, 'edit']);
 Route::post('/newsUpdate/{id}',[App\Http\Controllers\newsController::class, 'update']);
 Route::get('/deleteNews/{id}',[App\Http\Controllers\newsController::class, 'delete']);
+Route::post('/filterNews',[App\Http\Controllers\newsController::class, 'filterNews']);
 
 //image_info
 Route::get('/addImage',[App\Http\Controllers\imageUploadController::class, 'index']);

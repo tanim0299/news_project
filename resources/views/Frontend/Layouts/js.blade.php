@@ -281,6 +281,32 @@
 
         loadComment();
 
+        function loadCountComment()
+        {
+            var news_id = $('#news_id').val();
+            $.ajax({
+                headers:
+                {
+                    'X-CSRF-TOKEN' : '{{ csrf_token() }}'
+                },
+
+                url : '{{url('countComment')}}',
+
+                type : 'POST',
+
+                data : {news_id},
+
+                success : function(data)
+                {
+                    $("#totalComment").html(data);
+                }
+            });
+        }
+
+
+        loadCountComment();
+
+
         $('#post').on('click',function(e){
             e.preventDefault();
 
@@ -311,6 +337,7 @@
                         if(data == 1)
                         {
                             loadComment();
+                            loadCountComment();
                             $('#summernote').summernote('reset');
                             UIkit.notification({
                                 message: '<span uk-icon=\'icon: check\'></span> Comment Added'

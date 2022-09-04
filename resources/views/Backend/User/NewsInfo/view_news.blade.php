@@ -34,6 +34,23 @@ use App\Models\news_sub_menu_info;
 <div class="links" style="margin-top: 20px;">
     <a href="{{url('/publishNews')}}" class="btn btn-outline-info">Add News</a>
 </div>
+<h5>Filter News</h5>
+<form method="POST" action="{{url('filterNews')}}">
+    @csrf
+<div class="form-group row mt-4">
+        <div class="col-4">
+            <label>From</label>
+            <input type="text" class="form-control dateTimepicker" id="dateTimePicker" name="from_date" autocomplete="off" value="@php echo date('Y-m-d') @endphp">
+        </div>
+        <div class="col-4">
+            <label>To</label>
+            <input type="text" class="form-control dateTimepicker" id="dateTimePicker1" name="to_date" autocomplete="off" value="@php echo date('Y-m-d') @endphp">
+        </div>
+        <div class="col-12 mt-4">
+            <input type="submit" class="btn btn-info" value="Filter">
+        </div>
+    </div>
+</form>
 </div>
 </div>
 </div>

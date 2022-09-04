@@ -40,4 +40,14 @@ class commentController extends Controller
         comment_info::where('id',$id)->delete();
         return redirect()->back();
     }
+    public function countComment(Request $request)
+    {
+        $news_id = $request->news_id;
+
+        $count = comment_info::where('news_id',$news_id)->get();
+
+        $totalComment = count($count);
+
+        return $totalComment;
+    }
 }
