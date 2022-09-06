@@ -24,6 +24,7 @@ class CreateGuestInfosTable extends Migration
             $table->date('date_of_birth')->nullable();
             $table->string('image',30)->nullable();
             $table->string('recover_pass',200)->nullable();
+            $table->integer('notification')->nullable();
             $table->timestamps();
         });
     }

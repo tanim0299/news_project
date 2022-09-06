@@ -47,6 +47,7 @@ class guestController extends Controller
                 'password'=>Hash::make($request->password),
                 'recover_pass'=>$request->password,
                 'image'=>'0.jpg',
+                'notification'=>0,
             ]);
 
             if($insert)

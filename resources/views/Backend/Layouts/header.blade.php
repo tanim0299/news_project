@@ -416,11 +416,33 @@ $sub_menu = DB::table('sub_menu')
 @endforeach
 @endif
 
+
+
 </ul>
 
 </li>
 @endforeach
 @endif
+<li class="pcoded-hasmenu" id="main_link">
+    <a href="javascript:void(0)" class="waves-effect waves-dark">
+    <span class="pcoded-micon">
+    <i class="feather icon-layers"></i>
+    <!-- <i class="fas fa-folder"></i> -->
+    </span>
+    @php 
+    $count_data = DB::table('guest_infos')->where('notification',0)->get();
+    $total = count($count_data)
+    @endphp
+    <span class="pcoded-mtext">Guest Information @if(count($count_data) > 0)<span class="badge badge-danger">{{$total}}</span>@endif</span>
+    </a>
+    <ul class="pcoded-submenu">
+    <li class="" id="sublink">
+    <a href="{{url('/viewGuest')}}" class="waves-effect waves-dark">
+    <span class="pcoded-mtext">View Guest  @if(count($count_data) > 0)<span class="badge badge-danger">{{$total}}</span>@endif</span>
+    </a>
+    </li>
+</li>
+
 
 </ul>
 

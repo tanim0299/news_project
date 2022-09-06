@@ -14,8 +14,8 @@ class adminGuestController extends Controller
     }
     public function viewGuest()
     {
-    //    $country = DB::table('guest_countries')->where('id',8)->first();
-    //     return $country->country;
+        DB::table('guest_infos')->update(['notification'=>1]);
+
         $data = guest_info::all();
         $sl=1;
         return view('Backend.User.Guest.view_guest',compact('data','sl'));
